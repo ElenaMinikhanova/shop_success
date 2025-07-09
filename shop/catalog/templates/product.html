@@ -1,0 +1,27 @@
+<!-- templates/about.html -->
+{% extends 'base.html' %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/product_style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header_footer.css' %}">
+{% endblock %}
+
+{% block title %} Детали продукта {% endblock %}
+
+{% block content %}
+
+    <section class="catalog">
+        <h1> {{product.name}} </h1>
+        <img src="{{product.photo.url}}" alt="Изображение продукта" />
+        <p class="cost">Цена: {{product.price}}</p>
+        <div class="detailed1">
+            <button class="detailed color" type="button">Добавить в корзину</button>
+        </div>
+        <div class="back">
+            <button onclick="history.back()">Назад</button>
+        </div>
+    </section>
+
+{% endblock %}

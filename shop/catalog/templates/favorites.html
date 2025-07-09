@@ -1,0 +1,29 @@
+<!-- templates/about.html -->
+{% extends 'base.html' %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/favorites.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header_footer.css' %}">
+{% endblock %}
+
+{% block title %} favorites {% endblock %}
+
+{% block content %}
+
+    <section class="catalog">
+        <h1>Мои избранные товары</h1>
+        {% for product in products %}
+        <div>
+          {{product.name}}
+        </div>
+        <div>
+          {{product.price}}
+        </div>
+        {% endfor %}
+        <div class="back">
+            <button onclick="history.back()">Назад</button>
+        </div>
+
+{% endblock %}

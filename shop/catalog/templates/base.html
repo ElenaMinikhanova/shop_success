@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block styles %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header_footer.css' %}">
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://db.onlinewebfonts.com/c/af7d9ff7bc3d5c229740fe9fe78ebca6?family=Vetrino" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <title>{% block title %}Flowers{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+    <header class="header">
+      <div class="container">
+        <div class="header__wrapper">
+        <a href="{% url 'view' %}" style="cursor:pointer; text-decoration: none; color: inherit;" class="header_name" >
+          УРОЖАЙ
+        </a>
+        <div class="header_menu">
+          <div>
+            Каталог
+          </div>
+          <a href="{% url 'view'%}" style="cursor:pointer; text-decoration: none; color: white;">
+            О нас
+          </a>
+          <div>
+            Доставка
+          </div>
+          <div>
+            Оплата
+          </div>
+        </div>
+        <div class="header_basket">
+          Корзина &ensp;&ensp;&ensp;
+
+          <a class="vector" href="{% url 'favorites' %}">
+              <img id="favoritesPageLink" style="cursor:pointer" src="{% static 'images/Vector.png' %}">
+          </a>
+
+        </div>
+
+
+      <img src="{% static 'images/Vector1.jpg' %}" alt="полосы" class="logo">
+      <nav class="nav-menu">
+      <ul>
+        <li><a href="#">Каталог</a></li>
+        <li><a href="#">О нас</a></li>
+        <li><a href="#">Доставка</a></li>
+        <li><a href="#">Оплата</a></li>
+        <li><a href="#">Корзина</a></li>
+        <li><a id="favoritesPageLink1"  href="{% url 'favorites' %}">Избранное</a></li>
+      </ul>
+      </nav>
+      <div class="overlay"></div>
+
+      </div>
+      </div>
+    </header>
+
+
+{% block content %}
+
+    <section class="about">
+      <div class="container">
+        <div class="mask_top">
+          <div class="div_name">
+            УРОЖАЙ
+          </div>
+          <div class="div_ip">
+            ИП Паршин М. В.
+          </div>
+          <div>
+            <button class="input_basket color" type="button" id="input_basket">В каталог</button>
+          </div>
+      </div>
+      </div>
+    </section>
+
+
+    <section class="catalog">
+      <div class="container section">
+        <div class="today">
+          <div class="div_today">
+            <div class="product_text"> Сегодня в наличии </div>
+            <div class="line"></div>
+          </div>
+
+
+          <div class="div_product">
+
+            <div class="grup_product mobil">
+
+            {% for product in products|slice:":3" %}
+
+              <div class="product">
+                <div class="drawing" style="background-image:url('{{product.photo.url}}')">
+                  <img class="like-img" src="{% if not product.like %}static/images/Vector.png{% else %}static/images/Vector1.png{% endif %}"
+                  data-product-id="{{product.pk}}"
+                  style="cursor:pointer;">
+                </div>
+                <div class="product_info">
+                  <div class="product_info1">
+                    <button class="input_hit" type="button">{{product.category}}</button>
+                    <div class="bouquet_name">
+                      {{product.name}}
+                    </div>
+                    <div class="cost">
+                      {{product.price}}
+                    </div>
+                  </div>
+                  <div class="detailed1">
+                    <a href="{% url 'detail' product.pk %}" style="cursor:pointer; text-decoration: none; color: white;" class="detailed color">Подробнее</a>
+                  </div>
+                </div>
+              </div>
+
+              {% endfor %}
+
+            </div>
+
+            <div class="grup_product mobil">
+
+            {% for product in products|slice:"3:6" %}
+
+              <div class="product">
+                <div class="drawing" style="background-image:url('{{product.photo.url}}')">
+                  <img class="like-img" src="{% if not product.like %}static/images/Vector.png{% else %}static/images/Vector1.png{% endif %}"
+                  data-product-id="{{product.pk}}"
+                  style="cursor:pointer;">
+                </div>
+                <div class="product_info">
+                  <div class="product_info1">
+                    <button class="input_hit" type="button">{{product.category}}</button>
+                    <div class="bouquet_name">
+                      {{product.name}}
+                    </div>
+                    <div class="cost">
+                      {{product.price}}
+                    </div>
+                  </div>
+                  <div class="detailed1">
+                    <a href="{% url 'detail' product.pk %}" style="cursor:pointer; text-decoration: none; color: white;" class="detailed color">Подробнее</a>
+                  </div>
+                </div>
+              </div>
+
+              {% endfor %}
+
+            </div>
+
+            <div class="grup_product mobil">
+
+            {% for product in products|slice:"6:9" %}
+
+              <div class="product">
+                <div class="drawing" style="background-image:url('{{product.photo.url}}')">
+                  <img class="like-img" src="{% if not product.like %}static/images/Vector.png{% else %}static/images/Vector1.png{% endif %}"
+                  data-product-id="{{product.pk}}"
+                  style="cursor:pointer;">
+                </div>
+                <div class="product_info">
+                  <div class="product_info1">
+                    <button class="input_hit" type="button">{{product.category}}</button>
+                    <div class="bouquet_name">
+                      {{product.name}}
+                    </div>
+                    <div class="cost">
+                      {{product.price}}
+                    </div>
+                  </div>
+                  <div class="detailed1">
+                    <a href="{% url 'detail' product.pk %}" style="cursor:pointer; text-decoration: none; color: white;" class="detailed color">Подробнее</a>
+                  </div>
+                </div>
+              </div>
+
+              {% endfor %}
+
+            </div>
+
+
+              </div>
+            </div>
+          </div>
+    </section>
+    <div class="div_div">
+
+
+
+    </div>
+    <section class="questions">
+      <div class="container">
+        <div class="mask_bottom">
+          <div class="question_letter">
+          <div class="question">
+            Остались вопросы?
+          </div>
+          <div class="letter">
+            Напишите нам
+          </div>
+          </div>
+          <form action="" method="get">
+            <label class="label_name">
+              <div>
+                Имя:
+              </div>
+              <input class="input_name" type="text" name="name">
+            </label>
+            <label class="label_phone">
+              <div>
+                Телефон:
+              </div>
+              <input class="input_phone" type="phone" name="phone">
+            </label>
+            <label class="label_comment">
+              <div>
+                Ваш вопрос
+              </div>
+              <textarea name="comment"></textarea>
+            </label>
+            <div class="input_sogl1">
+              <input class="input_sogl" type="checkbox" id="subscribe" name="subscribe" value="yes">
+              <label class="label_sogl" for="subscribe">Согласие на обработку<div class="prob"><br></div> персональных данных</label>
+            </div>
+            <button class="submit color" type="submit" disabled>
+              Отправить
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+{% endblock %}
+
+<footer class="footer">
+      <div class="container container1">
+        <div class="footer_name_mob">
+          УРОЖАЙ
+        </div>
+        <div class="footer_link">
+          <img class="footer_link1" src="{% static 'images/odnoklassniki_srby782wg2r8 2.png' %}" alt="Иконка одноклассников">
+          <img class="footer_link1" src="{% static 'images/vk_q5yb3l21rgfi 2.png' %}" onClick="window.open('https://vk.com/annaparshina1998?from=groups');" style="cursor:pointer">
+          <img class="footer_link1" src="{% static 'images/telegram_uiellad0w0fn 2.png' %}" alt="Иконка телеграмм">
+        </div>
+        <div class="footer_menu">
+          <div>
+            Каталог
+          </div>
+          <div>
+            Доставка
+          </div>
+          <div>
+            Оплата
+          </div>
+        </div>
+        <div class="footer_name">
+          УРОЖАЙ
+        </div>
+        <div class="footer_pol">
+          Политика конфиденциальности
+        </div>
+      </div>
+
+    </footer>
+
+<script>
+document.querySelectorAll('.like-img').forEach(img => {
+    img.addEventListener('click', () => {
+        const productId = img.dataset.productId;
+        fetch("{% url 'toggle_like' %}", {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                'product_id': productId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            // меняем изображение в зависимости от new like
+            if (data.like) {
+                img.src = "{% static 'images/Vector1.png' %}";
+            } else {
+                img.src = "{% static 'images/Vector.png' %}";
+            }
+        });
+    });
+});
+</script>
+<script src="{% static 'js/skript.js' %}"></script>
+
+</body>
+</html>

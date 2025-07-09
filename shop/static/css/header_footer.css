@@ -1,0 +1,237 @@
+.header {
+    height: 100px;
+    width: 100%;
+    background-color: #78AC47;
+    color: #FFFDFD;
+    font-size: 24px;
+    font-family: "Rubik";
+    font-weight: 500;
+}
+.container {
+    max-width: 1240px;
+    margin: 0 auto;
+    width: 100%;
+    height: 90%;
+}
+.header__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+}
+.header_name {
+    height: 84px;
+    width: 227px;
+    display: flex;
+    align-items: center;
+    font-size: 32px;
+    font-family: "Vetrino";
+    font-weight: 400;
+}
+.header_menu {
+    height: 84px;
+    width: 534px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header_basket {
+    height: 84px;
+    width: 227px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.logo {
+    display: none;
+}
+.nav-menu {
+    display: none;
+}
+.footer {
+    height: 302px;
+    background-color: #234118;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.footer_name_mob {
+    display: none;
+}
+.footer_link {
+    display: flex;
+    gap: 58px;
+    justify-content: flex-start;
+    align-items: center;
+}
+.footer_menu {
+    color: #FFFDFD;
+    font-size: 24px;
+    font-family: "Rubik";
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 90px;
+    height: 84px;
+    font-weight: 500;
+}
+.footer_name {
+    font-size: 32px;
+    font-family: "Vetrino";
+    color: #FFFDFD;
+    height: 84px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-weight: 400;
+}
+.footer_pol {
+    color: #FFFDFD;
+    font-size: 22px;
+    font-family: "Rubik";
+    font-weight: 400;
+}
+
+
+.color:hover {
+    background-color: #8F9BA3;
+    border-bottom: 1px solid #8F9BA3;
+}
+.color:active {
+    background-color: #BC5B90;
+    border-bottom: 1px solid #BC5B90;
+}
+
+
+@media (max-width: 850px){
+    .header {
+        height: 80px;
+    }
+    .container {
+        max-width: 480px;
+        height: 100%;
+    }
+    .header__wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+    }
+    .header_name {
+        height: 33px;
+        width: 148px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+    }
+    .header_menu {
+        display: none;
+    }
+    .header_basket {
+        display: none;
+    }
+
+    .logo {
+        display: block;
+        margin-right:15px;
+        cursor: pointer;
+        width: 40px;
+        height: auto;
+    }
+    .nav-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: -250px;
+        width: 250px;
+        height: 300px;
+        background-color: #78AC47;
+        box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+        transition: right 0.3s ease-in-out;
+        z-index: 100;
+        border-radius: 10px;
+    }
+    .nav-menu ul {
+        list-style: none;
+        padding: 20px;
+        margin: 0;
+    }
+    .nav-menu ul li {
+        margin-bottom: 10px;
+    }
+    .nav-menu ul li a {
+        text-decoration: none;
+        color: #FFFFFF;
+        font-size: 25px;
+    }
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+    }
+    .nav-menu.active {
+        display: block;
+        right: 0;
+    }
+    .overlay.active {
+        display: block;
+    }
+    li {
+        display: block;
+        padding: 8px;
+        color: white;
+        font-size: 18px;
+        font-family: "Rubik";
+        text-align: center;
+        text-decoration: none;
+    }
+    li:hover {
+        background: rgba(255,255,255,.2)
+    }
+    .footer {
+        height: 146px;
+    }
+    .container1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+    .footer_name_mob {
+        display: block;
+        font-size: 24px;
+        font-family: "Vetrino";
+        color: #FFFDFD;
+        height: 45px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        font-weight: 400;
+    }
+    .footer_link {
+        display: flex;
+        gap: 21px;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .footer_link1 {
+        header: 25px;
+        width:25px;
+    }
+    .footer_menu {
+        display: none;
+    }
+    .footer_name {
+        display: none;
+    }
+    .footer_pol {
+        display: none;
+    }
+}

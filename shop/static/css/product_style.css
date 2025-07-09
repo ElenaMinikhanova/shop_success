@@ -1,0 +1,48 @@
+.catalog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1 {
+    font-size: 40px;
+    font-family: "Rubik";
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+.cost {
+    font-size: 40px;
+    font-family: "Rubik";
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+.detailed1 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 50px;
+    width: 350px;
+}
+.detailed {
+    border: none;
+    color: #FFFDFD;
+    font-family: "Rubik";
+    font-size: 20px;
+    height: 100%;
+    width: 100%;
+    border-bottom: 1px solid #78AC47;
+    border-radius: 50px;
+    background-color: #78AC47;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+}
+#product-price {
+    font-size: 40px;
+    font-family: "Rubik";
+    height: 100px;
+    display: flex;
+    align-items: center;
+}

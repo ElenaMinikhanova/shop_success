@@ -1,0 +1,29 @@
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+}
+#favorite-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 30px;
+}
+.product {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 30px;
+    margin-top: 30px;
+}
+.img {
+    width: 100px;
+    height: 100px;
+}
+.price {
+    font-size: 32px;
+}
+h3 {
+    font-size: 32px;
+}

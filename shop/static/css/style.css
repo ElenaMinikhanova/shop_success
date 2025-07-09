@@ -1,0 +1,598 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.about {
+    background-image: url("../images/Mask group.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 587px;
+}
+.mask_top {
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+    gap: 26px;
+    padding-top: 128px;
+}
+.div_name {
+    color: #FFFDFD;
+    font-family: "Vetrino";
+    font-size: 64px;
+    font-weight: 400;
+}
+.div_ip {
+    color: #FFFDFD;
+    font-family: "Vetrino";
+    font-size: 48px;
+    font-weight: 400;
+}
+.input_basket {
+    border: none;
+    color: #FFFDFD;
+    font-family: "Rubik";
+    font-size: 26px;
+    height: 64px;
+    width: 400px;
+    border-bottom: 1px solid #78AC47;
+    border-radius: 50px;
+    background-color: #78AC47;
+    font-weight: 500;
+}
+
+.catalog {
+    background-color: #EAEAEA;
+    height: fit-content;
+}
+.today {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+.div_today {
+    display: flex;
+    align-items: center;
+    height: 135px;
+    gap: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.product_text {
+    font-family: "Vetrino";
+    font-size: 36px;
+    flex-basis: 401px;
+    font-weight: 400;
+    line-height: 48px;
+}
+.line {
+  border-bottom: 1px solid #000;
+  flex: 1;
+}
+.div_product {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 15px;
+}
+.grup_product {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+.product {
+    height: 477px;
+    width: 400px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+    border-radius: 20px;
+}
+.product {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.drawing {
+    border-radius: 10px;
+    height: 65%;
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-top: 20px;
+    padding-right: 20px;
+    background-size: cover;
+}
+.img {
+    cursor: pointer;
+}
+.drawing1 {
+    background-image: url("../images/Mask group (1).png");
+}
+.drawing2 {
+    background-image: url("../images/Mask group (2).png");
+}
+.drawing3 {
+    background-image: url("../images/Mask group (3).png");
+}
+.drawing4 {
+    background-image: url("../images/Mask group (4).png");
+}
+.drawing5 {
+    background-image: url("../images/Mask group (5).png");
+}
+.drawing6 {
+    background-image: url("../images/Mask group (6).png");
+}
+.drawing7 {
+    background-image: url("../images/Mask group (7).png");
+}
+.drawing8 {
+    background-image: url("../images/Mask group (8).png");
+}
+.drawing9 {
+    background-image: url("../images/Mask group (9).png");
+}
+.product_info {
+    height: 23%;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+}
+.product_info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.product_info1 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.input_hit {
+    font-family: "Rubik";
+    font-size: 18px;
+    height: 30px;
+    width: 145px;
+    border-radius: 50px;
+    background-color: #FFFFFF;
+    font-weight: 500;
+}
+.bouquet_name {
+    height: 27px;
+    font-size: 20px;
+    font-family: "Rubik";
+    font-weight: 400;
+}
+.cost {
+    height: 27px;
+    font-size: 22px;
+    font-family: "Rubik";
+    font-weight: 500;
+}
+.detailed1 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    height: 50px;
+    width: 350px;
+}
+.detailed {
+    border: none;
+    color: #FFFDFD;
+    font-family: "Rubik";
+    font-size: 20px;
+    height: 100%;
+    width: 100%;
+    border-bottom: 1px solid #78AC47;
+    border-radius: 50px;
+    background-color: #78AC47;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+}
+.div_div {
+    height: 60px;
+    background-color: #EAEAEA;
+    }
+
+.questions {
+    background-image: url("../images/Mask group_b.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 757px;
+    object-fit: none;
+}
+.mask_bottom {
+    height: 700px;
+    width: 100%-105px;
+    display: flex;
+    flex-direction: column;
+    background-size: cover;
+    justify-content: flex-start;
+    gap: 26px;
+    padding-top: 50px;
+}
+.question_letter {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;;
+        justify-content: flex-start;
+        gap: 10px;
+}
+.question {
+    height: 40px;
+    width: 687px;
+    display: flex;
+    align-items: center;
+    font-size: 34px;
+    font-family: "Vetrino";
+    color: #FFFDFD;
+    font-weight: 400;
+}
+.letter {
+    height: 40px;
+    width: 687px;
+    display: flex;
+    align-items: center;
+    font-size: 34px;
+    font-family: "Vetrino";
+    color: #FFFDFD;
+    font-weight: 400;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.label_name {
+    color: #FFFDFD;
+    font-size: 22px;
+    font-family: "Rubik";
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    height: 64px;
+    width: 824px;
+    padding-left: 10px;
+    border-bottom: 1.5px solid #FFFDFD;
+    font-weight: 400;
+}
+.input_name {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    outline: none;
+}
+.label_phone {
+    color: #FFFDFD;
+    font-size: 22px;
+    font-family: "Rubik";
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    height: 64px;
+    width: 824px;
+    padding-left: 10px;
+    border-bottom: 1.5px solid #FFFDFD;
+    font-weight: 400;
+}
+.input_phone {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    outline: none;
+}
+.label_comment {
+    color: #FFFDFD;
+    font-size: 22px;
+    font-family: "Rubik";
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+    height: 175px;
+    width: 824px;
+    padding-left: 10px;
+    border-bottom: 1.5px solid #FFFDFD;
+    font-weight: 400;
+}
+textarea {
+    height: 110px;
+    width: 700px;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    outline: none;
+}
+.label_sogl {
+    color: #FFFDFD;
+    font-size: 22px;
+    font-family: "Rubik";
+    font-weight: 400;
+}
+.input_sogl {
+    height: 20px;
+    width: 20px;
+}
+.input_sogl::after {
+  content: '✔';
+  display: none;
+  color: green;
+  font-size: 18px;
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+.input_sogl::before {
+  content: '✔';
+  display: none;
+  color: green;
+  font-size: 18px;
+  position: absolute;
+  top: 0;
+  left: 4px;
+}
+.submit {
+    border: none;
+    color: #FFFDFD;
+    font-family: "Rubik";
+    font-size: 26px;
+    height: 64px;
+    width: 400px;
+    border-bottom: 1px solid #78AC47;
+    border-radius: 50px;
+    background-color: #78AC47;
+    font-weight: 500;
+}
+.submit:disabled {
+    background-color: #78AC47;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+.img_mob {
+    display: none;
+}
+.prob {
+    display: none;
+}
+.menu {
+    display: none;
+}
+
+
+@media (max-width: 1270px){
+    .product_3 {
+        display: none;
+    }
+}
+
+@media (max-width: 850px){
+    .grup_product {
+        display: none;
+    }
+    .line {
+        display: none;
+    }
+    .mask_top {
+        align-items: center;
+        gap: 0px;
+        padding-top: 172px;
+    }
+    .about {
+        background-image: url("../images/Mask group_mob2.jpg");
+        height: 685px;
+    }
+    .div_name {
+        font-size: 40px;
+    }
+    .div_ip {
+        font-size: 32px;
+    }
+    .input_basket {
+        font-size: 18px;
+        height: 44px;
+        width: 288px;
+        margin-top: 59px;
+    }
+    .img_mob {
+        display: block;
+        height: 40px;
+        width: 40px;
+        display: flex;
+        align-items: center;
+    }
+    .product_text {
+        font-size: 26px;
+        flex-basis: 261px;
+        line-height: 33px;
+    }
+    .div_today {
+        justify-content: center;
+        width: 100%;
+    }
+    .today {
+        height: 95%;
+    }
+    .bouquet_name {
+        font-size: 23px;
+        display: flex;
+        justify-content: center;
+    }
+    .cost {
+        font-size: 25px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .detailed {
+        font-size: 18px;
+        height: 60px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .detailed1 {
+        width: 100%;
+        display: flex;
+        align-items: flex-end;
+        flex-basis: 25%;
+    }
+    .mobil {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+    .product {
+        height: 600px;
+        width: 360px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+    }
+    .drawing {
+        height: 275px;
+        width: 325px;
+        display: flex;
+    }
+    .product_info {
+        height: 45%;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+    }
+    .product_info1 {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+        flex-basis: 60%;
+    }
+    .input_hit {
+        font-size: 20px;
+        height: 40px;
+        width: 100%;
+    }
+    .questions {
+        background-image: url("../images/Mask group_mob1.jpg");
+        height: 630px;
+    }
+    .mask_bottom {
+        height: 479px;
+        width: 100%-105px;
+        display: flex;
+        flex-direction: column;
+        background-size: cover;
+        justify-content: flex-start;
+        gap: 26px;
+        padding-top: 50px;
+    }
+    .question {
+        height: 30px;
+        width: 289px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+    }
+
+    .letter {
+        height: 30px;
+        width: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+    }
+    .question_letter {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+    }
+    .label_name {
+        font-size: 16px;
+        gap: 10px;
+        height: 64px;
+        width: 288px;
+        padding-left: 16px;
+    }
+    .label_phone {
+        font-size: 16px;
+        gap: 10px;
+        height: 64px;
+        width: 288px;
+        padding-left: 10px;
+    }
+    .label_comment {
+        font-size: 16px;
+        gap: 10px;
+        height: 99px;
+        width: 288px;
+        padding-left: 10px;
+    }
+    textarea {
+        height: 100px;
+        width: 250px;
+    }
+    .prob {
+        display: inline;
+    }
+    .input_sogl {
+        height: 20px;
+        width: 20px;
+    }
+    .label_sogl {
+        font-size: 14px;
+    }
+    .input_sogl1 {
+        width: 288px;
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+    .submit {
+        font-size: 18px;
+        height: 44px;
+        width: 288px;
+    }
+
+    .color:hover {
+        background-color: #78AC47;
+        border-bottom: 1px solid #78AC47;
+    }
+    .color:active {
+        background-color: #BC5B90;
+        border-bottom: 1px solid #BC5B90;
+    }
+}
+
+
