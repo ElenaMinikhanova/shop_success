@@ -103,15 +103,15 @@
 
               <div class="product">
                 <div class="drawing" style="background-image:url('{{product.photo.url}}')">
-                  <img class="like-img" src="{% if not product.like %}static/images/Vector.png{% else %}static/images/Vector1.png{% endif %}"
+                  <img class="like-img" src="{% static 'images/Vector.png' %}"
                   data-product-id="{{product.pk}}"
                   style="cursor:pointer;">
                 </div>
                 <div class="product_info">
                   <div class="product_info1">
-                    <button class="input_hit" type="button">{{product.category}}</button>
+                    <button class="input_hit" type="button">{{product.name}}</button>
                     <div class="bouquet_name">
-                      {{product.name}}
+                      {{product.category}}
                     </div>
                     <div class="cost">
                       {{product.price}}
@@ -133,15 +133,15 @@
 
               <div class="product">
                 <div class="drawing" style="background-image:url('{{product.photo.url}}')">
-                  <img class="like-img" src="{% if not product.like %}static/images/Vector.png{% else %}static/images/Vector1.png{% endif %}"
+                  <img class="like-img" src="{% static 'images/Vector.png' %}"
                   data-product-id="{{product.pk}}"
                   style="cursor:pointer;">
                 </div>
                 <div class="product_info">
                   <div class="product_info1">
-                    <button class="input_hit" type="button">{{product.category}}</button>
+                    <button class="input_hit" type="button">{{product.name}}</button>
                     <div class="bouquet_name">
-                      {{product.name}}
+                      {{product.category}}
                     </div>
                     <div class="cost">
                       {{product.price}}
@@ -163,15 +163,15 @@
 
               <div class="product">
                 <div class="drawing" style="background-image:url('{{product.photo.url}}')">
-                  <img class="like-img" src="{% if not product.like %}static/images/Vector.png{% else %}static/images/Vector1.png{% endif %}"
+                  <img class="like-img" src="{% static 'images/Vector.png' %}"
                   data-product-id="{{product.pk}}"
                   style="cursor:pointer;">
                 </div>
                 <div class="product_info">
                   <div class="product_info1">
-                    <button class="input_hit" type="button">{{product.category}}</button>
+                    <button class="input_hit" type="button">{{product.name}}</button>
                     <div class="bouquet_name">
-                      {{product.name}}
+                      {{product.category}}
                     </div>
                     <div class="cost">
                       {{product.price}}
@@ -271,33 +271,6 @@
       </div>
 
     </footer>
-
-<script>
-document.querySelectorAll('.like-img').forEach(img => {
-    img.addEventListener('click', () => {
-        const productId = img.dataset.productId;
-        fetch("{% url 'toggle_like' %}", {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': '{{ csrf_token }}',
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
-                'product_id': productId
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            // меняем изображение в зависимости от new like
-            if (data.like) {
-                img.src = "{% static 'images/Vector1.png' %}";
-            } else {
-                img.src = "{% static 'images/Vector.png' %}";
-            }
-        });
-    });
-});
-</script>
 <script src="{% static 'js/skript.js' %}"></script>
 
 </body>

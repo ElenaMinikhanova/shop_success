@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import PostListView, PostDetailView, ToggleLikeView, PostListFavorites
+from django.views.generic import TemplateView
+from .views import PostListView, PostDetailView
 
 urlpatterns = [
     path('', PostListView.as_view(), name='view'),
     path('product/<int:pk>', PostDetailView.as_view(), name='detail'),
-    path('toggle-like/', ToggleLikeView.as_view(), name='toggle_like'),
-    path('favorites/', PostListFavorites.as_view(), name='favorites'),
+    path('favorites/', TemplateView.as_view(template_name='favorites.html'), name='favorites'),
 ]
