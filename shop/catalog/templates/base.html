@@ -48,7 +48,6 @@
 
         </div>
 
-
       <img src="{% static 'images/Vector1.jpg' %}" alt="полосы" class="logo">
       <nav class="nav-menu">
       <ul>
@@ -186,8 +185,6 @@
               {% endfor %}
 
             </div>
-
-
               </div>
             </div>
           </div>
@@ -197,47 +194,8 @@
 
 
     </div>
-    <section class="questions">
-      <div class="container">
-        <div class="mask_bottom">
-          <div class="question_letter">
-          <div class="question">
-            Остались вопросы?
-          </div>
-          <div class="letter">
-            Напишите нам
-          </div>
-          </div>
-          <form action="" method="get">
-            <label class="label_name">
-              <div>
-                Имя:
-              </div>
-              <input class="input_name" type="text" name="name">
-            </label>
-            <label class="label_phone">
-              <div>
-                Телефон:
-              </div>
-              <input class="input_phone" type="phone" name="phone">
-            </label>
-            <label class="label_comment">
-              <div>
-                Ваш вопрос
-              </div>
-              <textarea name="comment"></textarea>
-            </label>
-            <div class="input_sogl1">
-              <input class="input_sogl" type="checkbox" id="subscribe" name="subscribe" value="yes">
-              <label class="label_sogl" for="subscribe">Согласие на обработку<div class="prob"><br></div> персональных данных</label>
-            </div>
-            <button class="submit color" type="submit" disabled>
-              Отправить
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
+
+    {% include 'feedback.html' %}
 
 {% endblock %}
 

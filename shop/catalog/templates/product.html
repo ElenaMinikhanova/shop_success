@@ -14,7 +14,9 @@
 
     <section class="catalog">
         <h1> {{product.name}} </h1>
-        <img src="{{product.photo.url}}" alt="Изображение продукта" />
+        <div class="img">
+            <img style="height: 400px; width: 400px;" src="{{product.photo.url}}" alt="Изображение продукта" />
+        </div>
         <p class="cost">Цена: {{product.price}}</p>
         <div class="detailed1">
             <button class="detailed color" type="button">Добавить в корзину</button>
