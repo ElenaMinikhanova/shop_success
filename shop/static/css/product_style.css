@@ -47,8 +47,8 @@ h1 {
     align-items: center;
 }
 .img {
-    height: 250px;
-    width: 250px;
+    height: 300px;
+    width: 300px;
     background-size: cover;
     background-position: center;
     border-radius: 10px;

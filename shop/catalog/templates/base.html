@@ -29,7 +29,7 @@
           <div>
             Каталог
           </div>
-          <a href="{% url 'view'%}" style="cursor:pointer; text-decoration: none; color: white;">
+          <a href="{% url 'about_us'%}" style="cursor:pointer; text-decoration: none; color: white;">
             О нас
           </a>
           <div>
@@ -68,22 +68,7 @@
 
 {% block content %}
 
-    <section class="about">
-      <div class="container">
-        <div class="mask_top">
-          <div class="div_name">
-            УРОЖАЙ
-          </div>
-          <div class="div_ip">
-            ИП Паршин М. В.
-          </div>
-          <div>
-            <button class="input_basket color" type="button" id="input_basket">В каталог</button>
-          </div>
-      </div>
-      </div>
-    </section>
-
+    {% include 'name.html' %}
 
     <section class="catalog">
       <div class="container section">
@@ -92,7 +77,6 @@
             <div class="product_text"> Сегодня в наличии </div>
             <div class="line"></div>
           </div>
-
 
           <div class="div_product">
 

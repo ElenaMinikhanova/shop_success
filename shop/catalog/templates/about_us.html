@@ -1,0 +1,117 @@
+<!-- templates/about.html -->
+{% extends 'base.html' %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/about_us.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header_footer.css' %}">
+{% endblock %}
+
+{% block title %} about_us {% endblock %}
+
+{% block content %}
+
+    {% include 'name.html' %}
+
+    <section class="catalog">
+      <div class="container section">
+        <div class="today">
+          <div class="div_today">
+            <div class="product_text_us"> О нас </div>
+            <div class="line"></div>
+          </div>
+          <div class="detailed_us">
+              <div class="detailed_stock">Всегда в наличии</div>
+              <div class="detailed_prices">Приемлемые цены</div>
+              <div class="detailed_discounts">Скидки</div>
+              <div class="detailed_stocks">Акции</div>
+          </div>
+
+
+          <div class="helloy_info">
+              <div class="helloy">
+                  <p class="helloy_text">Добро пожаловать!</p>
+                  <p class="text">Наша платформа создана для продажи букетов, мягких игрушек, сладких наборов, горшков, семян и всего,
+что связанно с садом и огородом.</p>
+                  <p class="text">Мы обеспечиваем возможность вам, невыходя из дома
+или не отрываясь от работы доступ к нашим товарам. Помочь родственникам/любимым, на расстоянии поздравить и подарить улыбку и хорошее настоение!</p>
+              </div>
+
+                <div class="info">
+                    <div class="info1">
+                          <div class="pole">
+                              <p class="dano">15</p>
+                              <p class="text2">лет радуем <br> вас</p>
+                          </div>
+                          <img class="img_info" src="{% static 'images/Mask group.png' %}">
+                    </div>
+                    <div class="info1">
+                          <img class="img_info" src="{% static 'images/Mask groupp.png' %}">
+                          <div class="pole">
+                              <p class="dano">6 000+</p>
+                              <p class="text2">счастливых <br> клиентов</p>
+                          </div>
+                    </div>
+                </div>
+          </div>
+
+
+          <div class="div_today1">
+            <div class="product_text_otz"> Ваши отзывы </div>
+            <div class="line"></div>
+          </div>
+
+          <div class="reviews">
+          <div class="reviews1">
+            <div class="pole1">
+                <img class="img_pole1" src="{% static 'images/img_pole1.png' %}">
+                <div class="sum_text1">
+                <p class="text_reviews"><strong>Елена</strong></p>
+                <p class="text_reviews">Какой же яркий и насыщенный букет, впервые вижу розы
+с настолько цветастыми лепесточками, даже сначала подумала, что покрашены, но это
+не так. Поставила сразу в воду и цветы потом еще долго не увядали.
+</p>
+                </div>
+            </div>
+
+            <div class="pole2">
+             <img class="img_pole2" src="{% static 'images/img_pole2.png' %}">
+                <div class="sum_text2">
+                <p class="text_reviews"><strong>Дмитрий</strong></p>
+                <p class="text_reviews">Жене понравился, спасибо!</p>
+                </div>
+            </div>
+            <div class="pole3">
+             <img class="img_pole3" src="{% static 'images/img_pole3.png' %}">
+                <div class="sum_text3">
+                <p class="text_reviews"><strong>Ольга</strong></p>
+                <p class="text_reviews">Какой же яркий и насыщенный букет, впервые вижу розы с настолько цветастыми лепесточками, даже сначала подумала, что покрашены, но это не так. </p>
+                </div>
+            </div>
+          </div>
+          <div class="reviews1">
+            <div class="pole4">
+             <img class="img_pole4" src="{% static 'images/img_pole4.png' %}">
+                <div class="sum_text4">
+                <p class="text_reviews"><strong>Екатерина</strong></p>
+                <p class="text_reviews">Очень красивые и крупные розы. Цена адекватная.</p>
+                </div>
+            </div>
+            <div class="pole4">
+             <img class="img_pole4" src="{% static 'images/img_pole44.png' %}">
+                <div class="sum_text4">
+                <p class="text_reviews"><strong>Федот</strong></p>
+                <p class="text_reviews"> От души благодарствую! </p>
+                </div>
+            </div>
+          </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    {% include 'feedback.html' %}
+
+{% endblock %}

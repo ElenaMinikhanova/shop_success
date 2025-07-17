@@ -1,0 +1,493 @@
+html {
+    height: 100%;
+    width: 100%;
+}
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.div_today {
+    display: flex;
+    align-items: center;
+    height: 135px;
+    gap: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.div_today1 {
+    display: flex;
+    align-items: center;
+    height: 135px;
+    gap: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.product_text_us {
+    font-family: "Vetrino";
+    font-size: 36px;
+    flex-basis: 121px;
+    font-weight: 400;
+    line-height: 48px;
+}
+
+.line {
+  border-bottom: 1px solid #000;
+  flex: 1;
+}
+
+.catalog {
+    background-color: #EAEAEA;
+    height: fit-content;
+}
+
+.today {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.detailed_us {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    height: 50px;
+    width: 100%;
+    margin-bottom: 28px;
+}
+.detailed_stock {
+    border: none;
+    color: #000000;
+    font-family: "Rubik";
+    font-size: 18px;
+    width: 296px;
+    height: 32px;
+    border: 1px solid #78AC47;
+    border-radius: 50px;
+    background-color: #FFFDFD;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+.detailed_prices {
+    border: none;
+    color: #000000;
+    font-family: "Rubik";
+    font-size: 18px;
+    width: 192px;
+    height: 32px;
+    border: 1px solid #78AC47;
+    border-radius: 50px;
+    background-color: #FFFDFD;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+.detailed_discounts {
+    border: none;
+    color: #000000;
+    font-family: "Rubik";
+    font-size: 18px;
+    width: 192px;
+    height: 32px;
+    border: 1px solid #78AC47;
+    border-radius: 50px;
+    background-color: #FFFDFD;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+.detailed_stocks {
+    border: none;
+    color: #FFFFFF;
+    font-family: "Rubik";
+    font-size: 18px;
+    width: 192px;
+    height: 32px;
+    border: 1px solid #78AC47;
+    border-radius: 50px;
+    background-color: #78AC47;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+}
+.helloy_info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.helloy {
+    width: 712px;
+    height: 279px;
+    display: flex;
+    flex-direction: column;
+}
+.helloy_text {
+    font-size: 40px;
+    font-family: "Vetrino";
+    margin-bottom: 28px;
+}
+.text {
+    font-size: 24px;
+    font-family: "Rubik";
+    font-weight: 500;
+}
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.info1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+.pole {
+    display: flex;
+    flex-direction: column;
+    height: 223px;
+    width: 192px;
+    border: none;
+    font-family: "Rubik";
+    border-bottom: 1px solid #78AC47;
+    border-radius: 20px;
+    background-color: #78AC47;
+    font-weight: 700;
+}
+.dano {
+    font-family: "Vetrino";
+    font-size: 40px;
+    color: #FFFDFD;
+    margin-top: 40px;
+    margin-left: 12px;
+    font-weight: 300;
+}
+.text2 {
+    font-family: "Rubik";
+    font-size: 22px;
+    color: #FFFDFD;
+    margin-left: 12px;
+    font-weight: 500;
+}
+img_info {
+    height: 223px;
+    width: 296px;
+}
+.product_text_otz {
+    font-family: "Vetrino";
+    font-size: 36px;
+    flex-basis: 285px;
+    font-weight: 400;
+    line-height: 48px;
+}
+.reviews {
+    display: flex;
+    flex-direction: column;
+    gap: 31px;
+    margin-bottom: 89px;
+}
+.reviews1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 31px;
+}
+.pole1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 19px;
+    height: 545px;
+    width: 400px;
+    border: none;
+    font-family: "Rubik";
+    border-bottom: 1px solid #FFFFFF;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    gap: 20px;
+}
+.pole2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 19px;
+    height: 545px;
+    width: 296px;
+    border: none;
+    font-family: "Rubik";
+    border-bottom: 1px solid #FFFFFF;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+}
+.pole3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 19px;
+    height: 545px;
+    width: 504px;
+    border: none;
+    font-family: "Rubik";
+    border-bottom: 1px solid #FFFFFF;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+}
+.pole4 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 19px;
+    height: 422px;
+    width: 608px;
+    border: none;
+    font-family: "Rubik";
+    border-bottom: 1px solid #FFFFFF;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+}
+.img_pole1 {
+    height: 258px;
+    width: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sum_text1 {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 225px;
+    width: 360px;
+}
+.sum_text2 {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 104px;
+    width: 266px;
+}
+.sum_text3 {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 147px;
+    width: 454px;
+}
+.sum_text4 {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 92px;
+    width: 546px;
+}
+.img_pole2 {
+    height: 366px;
+    width: 266px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+.img_pole3 {
+    height: 311px;
+    width: 454px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+.img_pole4 {
+    height: 252px;
+    width: 546px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+
+@media (max-width: 850px){
+    .line {
+        display: none;
+    }
+    .today {
+        height: 95%;
+    }
+    .product_text_us {
+        font-size: 26px;
+        flex-basis: 121px;
+        font-weight: 400;
+        line-height: 32px;
+}
+    .detailed_us {
+        flex-direction: column;
+        gap: 10px;
+        height: 130px;
+        width: 100%;
+        margin-bottom: 28px;
+    }
+    .div_today {
+        height: 80px;
+}
+    .detailed_stock {
+        font-size: 16px;
+        width: 288px;
+        height: 32px;
+    }
+    .detailed_prices {
+        font-size: 16px;
+        width: 288px;
+        height: 32px;
+    }
+    .detailed_discounts {
+        font-size: 16px;
+        width: 288px;
+        height: 32px;
+    }
+    .detailed_stocks {
+        font-size: 16px;
+        width: 288px;
+        height: 32px;
+}
+   .helloy_info {
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+}
+    .helloy {
+        width: 292px;
+        height: 365px;
+        flex-direction: column;
+        align-items: center;
+}
+    .helloy_text {
+        font-size: 26px;
+        margin-bottom: 28px;
+}
+    .text {
+        font-size: 18px;
+        text-align: center;
+}
+    .pole {
+        height: 139px;
+        width: 140px;
+}
+    .dano {
+        font-size: 24px;
+        margin-top: 20px;
+        margin-left: 19px;
+}
+    .text2 {
+        font-size: 18px;
+        margin-left: 19px;
+        margin-top: 6px;
+}
+    .img_info {
+        height: 139px;
+        width: 140px;
+
+}
+    .div_today1 {
+        display: none;
+}
+    .reviews {
+        display: flex;
+        flex-direction: row;
+        gap: 31px;
+        margin-top: 22px;
+        margin-bottom: 89px;
+        overflow-x: auto;
+        white-space: nowrap;
+}
+    .pole1 {
+        padding-top: 10px;
+        height: 478px;
+        width: 190px;
+        gap: 10px;
+    }
+    .pole2 {
+        padding-top: 10px;
+        height: 478px;
+        width: 190px;
+        gap: 10px;
+    }
+    .pole3 {
+        padding-top: 10px;
+        height: 478px;
+        width: 190px;
+        gap: 10px;
+    }
+    .pole4 {
+        padding-top: 10px;
+        height: 478px;
+        width: 190px;
+        gap: 10px;
+    }
+    .img_pole1 {
+        height: 132px;
+        width: 170px;
+}
+    .img_pole2 {
+        height: 132px;
+        width: 170px;
+}
+    .img_pole3 {
+        height: 132px;
+        width: 170px;
+}
+    .img_pole4 {
+        height: 132px;
+        width: 170px;
+}
+    .sum_text1 {
+        font-size: 16px;
+        gap: 1px;
+        height: 314px;
+        width: 179px;
+        min-width: 0;
+        white-space: normal;
+}
+    .sum_text2 {
+        font-size: 16px;
+        gap: 1px;
+        height: 314px;
+        width: 179px;
+        min-width: 0;
+        white-space: normal;
+    }
+    .sum_text3 {
+        font-size: 16px;
+        gap: 1px;
+        height: 314px;
+        width: 179px;
+        min-width: 0;
+        white-space: normal;
+    }
+    .sum_text4 {
+        font-size: 16px;
+        gap: 1px;
+        height: 314px;
+        width: 179px;
+        min-width: 0;
+        white-space: normal;
+}
+
+
+
+}
