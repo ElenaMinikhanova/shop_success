@@ -6,3 +6,4 @@ from .models import Catalog
 @admin.register(Catalog)
 class ProductAdmin(admin.ModelAdmin):
     search_fields = ['category', 'name']
+
