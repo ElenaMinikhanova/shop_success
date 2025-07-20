@@ -1,5 +1,30 @@
+<!-- templates/about.html -->
+{% extends 'base.html' %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/favorites.css' %}">
+{% endblock %}
+
+{% block title %} favorites {% endblock %}
+
+{% block content %}
+
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+        <div>
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+                <div class="error">
+                    {{ field.errors }}
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
     <button type="submit">Зарегистрироваться</button>
 </form>
+
+{% endblock %}

@@ -119,9 +119,11 @@
 
               <div class="product">
                 <div class="drawing" style="background-image:url('{{product.photo.url}}')">
-                  <img class="like-img" src="{% static 'images/Vector.png' %}"
-                  data-product-id="{{product.pk}}"
-                  style="cursor:pointer;">
+                  <a href="{% url 'register'%}" style="cursor:pointer; text-decoration: none; color: white;">
+                    <img class="like-img" src="{% static 'images/Vector.png' %}"
+                    data-product-id="{{product.pk}}"
+                    style="cursor:pointer;">
+                  </a>
                 </div>
                 <div class="product_info">
                   <div class="product_info1">
@@ -149,9 +151,11 @@
 
               <div class="product">
                 <div class="drawing" style="background-image:url('{{product.photo.url}}')">
-                  <img class="like-img" src="{% static 'images/Vector.png' %}"
-                  data-product-id="{{product.pk}}"
-                  style="cursor:pointer;">
+                  <a href="{% url 'register'%}" style="cursor:pointer; text-decoration: none; color: white;">
+                    <img class="like-img" src="{% static 'images/Vector.png' %}"
+                    data-product-id="{{product.pk}}"
+                    style="cursor:pointer;">
+                  </a>
                 </div>
                 <div class="product_info">
                   <div class="product_info1">
