@@ -6,9 +6,10 @@
     {% block styles %}
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    {% endblock %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/header_footer.css' %}">
-    {% endblock %}
+    <link rel="icon" href="{% static 'images/fav.webp' %}" data-base-href="{% static 'images/fav.webp' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://db.onlinewebfonts.com/c/af7d9ff7bc3d5c229740fe9fe78ebca6?family=Vetrino" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -86,9 +87,11 @@
 
               <div class="product">
                 <div class="drawing" style="background-image:url('{{product.photo.url}}')">
-                  <img class="like-img" src="{% static 'images/Vector.png' %}"
-                  data-product-id="{{product.pk}}"
-                  style="cursor:pointer;">
+                  <a href="{% url 'register'%}" style="cursor:pointer; text-decoration: none; color: white;">
+                    <img class="like-img" src="{% static 'images/Vector.png' %}"
+                    data-product-id="{{product.pk}}"
+                    style="cursor:pointer;">
+                  </a>
                 </div>
                 <div class="product_info">
                   <div class="product_info1">
