@@ -12,19 +12,8 @@
 
 <form method="post">
     {% csrf_token %}
-    {{ form.non_field_errors }}
-    {% for field in form %}
-        <div>
-            {{ field.label_tag }}
-            {{ field }}
-            {% if field.errors %}
-                <div class="error">
-                    {{ field.errors }}
-                </div>
-            {% endif %}
-        </div>
-    {% endfor %}
-    <button type="submit">Зарегистрироваться</button>
+    {{ form.as_p }}
+    <button type="submit">Register</button>
 </form>
 
 {% endblock %}

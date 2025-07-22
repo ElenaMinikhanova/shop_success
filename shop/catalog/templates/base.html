@@ -43,7 +43,7 @@
         <div class="header_basket">
           Корзина &ensp;&ensp;&ensp;
 
-          <a class="vector" href="{% url 'favorites' %}">
+          <a class="vector" href="{% url 'view' %}">
               <img id="favoritesPageLink" style="cursor:pointer" src="{% static 'images/Vector.png' %}">
           </a>
 
@@ -57,7 +57,7 @@
         <li><a href="#">Доставка</a></li>
         <li><a href="#">Оплата</a></li>
         <li><a href="#">Корзина</a></li>
-        <li><a id="favoritesPageLink1"  href="{% url 'favorites' %}">Избранное</a></li>
+        <li><a id="favoritesPageLink1"  href="{% url 'view' %}">Избранное</a></li>
       </ul>
       </nav>
       <div class="overlay"></div>
@@ -86,7 +86,7 @@
             {% for product in products|slice:":3" %}
 
               <div class="product">
-                <div class="drawing" style="background-image:url('{{product.photo.url}}')">
+                <div class="drawing" style="background-image:url('{{product.photos.all.0.photo.url}}')">
                   <a href="{% url 'register'%}" style="cursor:pointer; text-decoration: none; color: white;">
                     <img class="like-img" src="{% static 'images/Vector.png' %}"
                     data-product-id="{{product.pk}}"
@@ -95,9 +95,9 @@
                 </div>
                 <div class="product_info">
                   <div class="product_info1">
-                    <button class="input_hit" type="button">{{product.name}}</button>
+                    <button class="input_hit" type="button">{{product.stock}}</button>
                     <div class="bouquet_name">
-                      {{product.category}}
+                      {{product.name}}
                     </div>
                     <div class="cost">
                       {{product.price}}
@@ -118,7 +118,7 @@
             {% for product in products|slice:"3:6" %}
 
               <div class="product">
-                <div class="drawing" style="background-image:url('{{product.photo.url}}')">
+                <div class="drawing" style="background-image:url('{{product.photos.all.0.photo.url}}')">
                   <a href="{% url 'register'%}" style="cursor:pointer; text-decoration: none; color: white;">
                     <img class="like-img" src="{% static 'images/Vector.png' %}"
                     data-product-id="{{product.pk}}"
@@ -150,7 +150,7 @@
             {% for product in products|slice:"6:9" %}
 
               <div class="product">
-                <div class="drawing" style="background-image:url('{{product.photo.url}}')">
+                <div class="drawing" style="background-image:url('{{product.photos.all.0.photo.url}}')">
                   <a href="{% url 'register'%}" style="cursor:pointer; text-decoration: none; color: white;">
                     <img class="like-img" src="{% static 'images/Vector.png' %}"
                     data-product-id="{{product.pk}}"
@@ -221,6 +221,5 @@
 
     </footer>
 <script src="{% static 'js/skript.js' %}"></script>
-
 </body>
 </html>
