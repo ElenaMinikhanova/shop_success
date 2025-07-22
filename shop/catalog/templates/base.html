@@ -41,12 +41,39 @@
           </div>
         </div>
         <div class="header_basket">
-          Корзина &ensp;&ensp;&ensp;
-
           <a class="vector" href="{% url 'view' %}">
-              <img id="favoritesPageLink" style="cursor:pointer" src="{% static 'images/Vector.png' %}">
+            {% if user.is_authenticated %}
+            <div class="like_count">
+              <img src="{% static 'images/Group 1.png' %}">
+              <div class="count_like">{{ like_count }}</div>
+            </div>
+            {% else %}
+            <div>
+              <img src="{% static 'images/Vector.png' %}">
+            </div>
+            {% endif %}
           </a>
-
+          <a class="vector" href="{% url 'view' %}">
+            {% if user.is_authenticated %}
+            <div class="basket_count">
+              <img src="{% static 'images/Group 2.png' %}">
+              <div class="count_basket">{{ basket_count }}</div>
+            </div>
+            {% else %}
+            <div>
+              <img src="{% static 'images/Layer_2.png' %}">
+            </div>
+            {% endif %}
+          </a>
+          {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}" style="display:inline;">
+              <img src="{% static 'images/Frame 839.png' %}">
+            </a>
+          {% else %}
+          <a href="{% url 'login'%}" style="cursor:pointer; text-decoration: none; color: white;">
+            <img src="{% static 'images/avtorizovatsya_qcmrbxi1b3yd 2.png' %}">
+          </a>
+          {% endif %}
         </div>
 
       <img src="{% static 'images/Vector1.jpg' %}" alt="полосы" class="logo">
@@ -83,16 +110,26 @@
 
             <div class="grup_product mobil">
 
-            {% for product in products|slice:":3" %}
+                  {% for product in products|slice:":3" %}
 
-              <div class="product">
-                <div class="drawing" style="background-image:url('{{product.photos.all.0.photo.url}}')">
-                  <a href="{% url 'register'%}" style="cursor:pointer; text-decoration: none; color: white;">
-                    <img class="like-img" src="{% static 'images/Vector.png' %}"
-                    data-product-id="{{product.pk}}"
-                    style="cursor:pointer;">
-                  </a>
-                </div>
+                    <div class="product">
+                      <div class="drawing" style="background-image:url('{{product.photos.all.0.photo.url}}')">
+                        {% if not user.is_authenticated %}
+                        <a href="{% url 'register'%}" style="cursor:pointer; text-decoration: none; color: white;">
+                          <img class="like-img" src="{% static 'images/Vector.png' %}"
+                          data-product-id="{{product.pk}}"
+                          style="cursor:pointer;">
+                        </a>
+                        {% else %}
+                        <div>
+                        <a href="{% url 'view'%}" style="cursor:pointer; text-decoration: none; color: white;">
+                          <img class="like-img" src="{% static 'images/Vector.png' %}"
+                          data-product-id="{{product.pk}}"
+                          style="cursor:pointer;">
+                        </a>
+                        </div>
+                        {% endif %}
+                      </div>
                 <div class="product_info">
                   <div class="product_info1">
                     <button class="input_hit" type="button">{{product.stock}}</button>

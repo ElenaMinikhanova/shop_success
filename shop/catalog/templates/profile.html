@@ -1,0 +1,9 @@
+{% if user.is_authenticated %}
+    <p>Здравствуйте, {{ user.username }}!</p>
+    <form method="post" action="{% url 'exit' %}">
+    {% csrf_token %}
+    <button type="submit">Выйти</button>
+</form>
+{% else %}
+    <p>Пожалуйста, <a href="{% url 'login' %}">войдите</a>.</p>
+{% endif %}

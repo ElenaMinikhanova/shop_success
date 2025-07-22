@@ -36,11 +36,41 @@
     justify-content: space-between;
 }
 .header_basket {
+    gap: 29px;
     height: 84px;
     width: 227px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+}
+.like {
+    cursor: pointer;
+    height: 40;
+    weight: 43;
+}
+.like_count {
+    position: relative;
+}
+.like_count .count_like {
+    position: absolute;
+    top: 33%; /* Центр по вертикали */
+    left: 84%; /* Центр по горизонтали */
+    transform: translate(-50%, -50%); /* Центрирование по обеим осям */
+    color: #EBEBEB;
+    font-weight: 500;
+    font-size: 8px;
+}
+.basket_count {
+    position: relative; /* Для позиционирования вложенных элементов */
+}
+.basket_count .count_basket {
+    position: absolute;
+    top: 33%; /* Центр по вертикали */
+    left: 83%; /* Центр по горизонтали */
+    transform: translate(-50%, -50%); /* Центрирование по обеим осям */
+    color: #EBEBEB;
+    font-weight: 500;
+    font-size: 8px;
 }
 .logo {
     display: none;
