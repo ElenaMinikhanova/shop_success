@@ -26,9 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-const likedImageUrl = '{% static "images/Vector1.png" %}';
-const unlikedImageUrl = '{% static "images/Vector.png" %}';
-
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.like-img').forEach(img => {
         img.addEventListener('click', () => {
@@ -45,9 +42,9 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 const timestamp = new Date().getTime();
                 if (data.status === 'liked') {
-                    img.setAttribute('src', likedImageUrl + '?t=' + timestamp);
+                    img.src = likedImageUrl + '?t=' + timestamp;
                 } else {
-                    img.setAttribute('src', unlikedImageUrl + '?t=' + timestamp);
+                    img.src = unlikedImageUrl + '?t=' + timestamp;
                 }
                 location.reload(); // перезагружает страницу
             });
