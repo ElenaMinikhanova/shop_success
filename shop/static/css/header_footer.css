@@ -63,6 +63,24 @@
 .basket_count {
     position: relative; /* Для позиционирования вложенных элементов */
 }
+.count_like {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 20px;
+    background-color: #BC5B90;
+    border-radius: 50%;
+}
+.count_basket {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 20px;
+    background-color: #BC5B90;
+    border-radius: 50%;
+}
 .basket_count .count_basket {
     position: absolute;
     top: 33%; /* Центр по вертикали */

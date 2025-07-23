@@ -14,21 +14,28 @@ class PostListView(ListView):
     template_name = 'base.html'
     context_object_name = 'products'
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        # Передать список liked ID для каждого пользователя
+        user = self.request.user
+        if user.is_authenticated:
+            liked_ids = set(user.user_likes.values_list('like_id', flat=True))
+        else:
+            liked_ids = set()
+        # добавляем атрибут к каждому продукту
+        for product in qs:
+            product.is_liked = product.id in liked_ids
+        return qs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-
         if user.is_authenticated:
-            # Количество лайков этого пользователя
             context['like_count'] = user.user_likes.count()
-
-            # Количество товаров в корзине этого пользователя
             context['basket_count'] = user.user_products.count()
         else:
-            # Для не авторизованных можно оставить 0 или None
             context['like_count'] = 0
             context['basket_count'] = 0
-
         return context
 
 class PostDetailView(DetailView):
@@ -36,10 +43,32 @@ class PostDetailView(DetailView):
     template_name = 'product.html'
     context_object_name = 'product'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_authenticated:
+            context['like_count'] = user.user_likes.count()
+            context['basket_count'] = user.user_products.count()
+        else:
+            context['like_count'] = 0
+            context['basket_count'] = 0
+        return context
+
 class RegisterView(View):
     def get(self, request):
         form = RegistrationForm()
         return render(request, 'registration.html', {'form': form})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_authenticated:
+            context['like_count'] = user.user_likes.count()
+            context['basket_count'] = user.user_products.count()
+        else:
+            context['like_count'] = 0
+            context['basket_count'] = 0
+        return context
 
     def post(self, request):
         form = RegistrationForm(request.POST)
@@ -53,3 +82,45 @@ class RegisterView(View):
 
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_authenticated:
+            context['like_count'] = user.user_likes.count()
+            context['basket_count'] = user.user_products.count()
+        else:
+            context['like_count'] = 0
+            context['basket_count'] = 0
+        return context
+
+class ToggleLikeView(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        data = json.loads(request.body)
+        product_id = data.get('product_id')
+        product = Product.objects.get(id=product_id)
+        user_like = UserLike.objects.filter(user=request.user, like=product).first()
+
+        if user_like:
+            user_like.delete()
+            status = 'disliked'
+        else:
+            UserLike.objects.create(user=request.user, like=product)
+            status = 'liked'
+
+        return JsonResponse({'status': status})
+
+class AboutUs(TemplateView):
+    template_name = 'about_us.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_authenticated:
+            context['like_count'] = user.user_likes.count()
+            context['basket_count'] = user.user_products.count()
+        else:
+            context['like_count'] = 0
+            context['basket_count'] = 0
+        return context
+
