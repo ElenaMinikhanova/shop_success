@@ -4,6 +4,8 @@ from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import RegistrationForm
 import json
+from django.http import HttpResponseNotAllowed
+from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from django.utils.decorators import method_decorator
@@ -128,4 +130,11 @@ class AboutUs(TemplateView):
             context['like_count'] = 0
             context['basket_count'] = 0
         return context
+
+class ExitView(View):
+    def post(self, request, *args, **kwargs):
+        logout(request)
+        return redirect('view')  # укажите URL или имя маршрута для редиректа
+    def get(self, request, *args, **kwargs):
+        return HttpResponseNotAllowed(['POST'])
 

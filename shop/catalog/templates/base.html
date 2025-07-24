@@ -66,9 +66,19 @@
             {% endif %}
           </a>
           {% if user.is_authenticated %}
-            <a href="{% url 'profile' %}" style="display:inline;">
-              <img src="{% static 'images/Frame 839.png' %}">
-            </a>
+            <def style="display:inline; position: relative;" class="profile-link">
+                <img src="{% static 'images/Frame 839.png' %}">
+                <div class="burger-menu">
+                    <ul>
+                        <li><a href="{% url 'profile' %}">Профиль</a></li>
+                        <li><form method="post" action="{% url 'exit' %}">
+                              {% csrf_token %}
+                              <button class="exit" type="submit">Выйти</button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </def>
           {% else %}
           <a href="{% url 'login'%}" style="cursor:pointer; text-decoration: none; color: white;">
             <img src="{% static 'images/avtorizovatsya_qcmrbxi1b3yd 2.png' %}">

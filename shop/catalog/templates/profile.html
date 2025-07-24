@@ -1,9 +1,24 @@
-{% if user.is_authenticated %}
-    <p>Здравствуйте, {{ user.username }}!</p>
-    <form method="post" action="{% url 'exit' %}">
-    {% csrf_token %}
-    <button type="submit">Выйти</button>
-</form>
-{% else %}
-    <p>Пожалуйста, <a href="{% url 'login' %}">войдите</a>.</p>
-{% endif %}
+{% extends 'base.html' %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/product_style.css' %}">
+{% endblock %}
+
+{% block title %} Детали продукта {% endblock %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <p>Здравствуйте, {{ user.username }}!</p>
+        <form method="post" action="{% url 'exit' %}">
+        {% csrf_token %}
+        <button type="submit">Выйти</button>
+    </form>
+    {% else %}
+        <p>Пожалуйста, <a href="{% url 'login' %}">войдите</a>.</p>
+    {% endif %}
+
+{% endblock %}
+
+

@@ -69,3 +69,23 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+// Обеспечим выполнение скрипта после загрузки DOM
+document.addEventListener('DOMContentLoaded', function() {
+    const profileLink = document.querySelector('.profile-link');
+
+    if (profileLink) {
+        const menu = profileLink.querySelector('.burger-menu');
+
+        profileLink.addEventListener('mouseenter', function() {
+            if (menu) {
+                menu.style.display = 'block';
+            }
+        });
+        profileLink.addEventListener('mouseleave', function() {
+            if (menu) {
+                menu.style.display = 'none';
+            }
+        });
+    }
+});
