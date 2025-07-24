@@ -96,18 +96,23 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 
 class ToggleLikeView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
+        # Обработка POST-запроса для переключения лайка
         data = json.loads(request.body)
         product_id = data.get('product_id')
         product = Product.objects.get(id=product_id)
+        # Проверка, есть ли уже лайк этого пользователя для этого продукта
         user_like = UserLike.objects.filter(user=request.user, like=product).first()
 
         if user_like:
+            # Если лайк есть — удаляем его (значит пользователь удаляет из избранного)
             user_like.delete()
             status = 'disliked'
         else:
+            # Если лайка нет — создаем его (добавление в избранное)
             UserLike.objects.create(user=request.user, like=product)
             status = 'liked'
 
+        # Возвращаем JSON-ответ с текущим статусом
         return JsonResponse({'status': status})
 
 class AboutUs(TemplateView):

@@ -29,17 +29,19 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.like-img').forEach(img => {
         img.addEventListener('click', () => {
-            const productId = img.dataset.productId;
+            const productId = img.dataset.productId; // Получаем ID товара из data-атрибута
+            // Отправляем POST-запрос на сервер
             fetch('/toggle-like/', {
                 method: 'POST',
                 headers: {
-                    'X-CSRFToken': getCookie('csrftoken'),
-                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken'), // Передача CSRF-токена
+                    'Content-Type': 'application/json', // Тип данных
                 },
-                body: JSON.stringify({product_id: productId}),
+                body: JSON.stringify({product_id: productId}), // Передача ID продукта
             })
-            .then(response => response.json())
+            .then(response => response.json()) // Обработка ответа как JSON
             .then(data => {
+                // Меняем изображение в зависимости от статуса
                 const timestamp = new Date().getTime();
                 if (data.status === 'liked') {
                     img.src = likedImageUrl + '?t=' + timestamp;
@@ -52,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Функция для получения CSRF-токена из cookies
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
