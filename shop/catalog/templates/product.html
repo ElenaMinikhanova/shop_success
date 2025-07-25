@@ -6,21 +6,40 @@
 {% endblock %}
 
 {% block title %} Детали продукта {% endblock %}
-
 {% block content %}
-
-    <section class="catalog">
-        <h1> {{product.name}} </h1>
-        <div>
-            <img class="img" src="{{product.photos.all.0.photo.url}}" alt="Изображение продукта" />
+    <section class="catalog_product">
+    <div class="first_block_product">
+        <a href="{{ request.META.HTTP_REFERER|default:'/' }}" class="back">
+            <img class="back_img" src="{% static 'images/Vector(1).png' %}">
+            <div>Назад</div>
+        </a>
+        <div class="foto_product" style="background-image:url('{{ product.photos.all.0.photo.url }}')">
+        <!-- Лайк -->
+        {% if user.is_authenticated %}
+            {% if liked %}
+            <img class="like-img" src="{% static 'images/Vector1.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+            {% else %}
+            <img class="like-img" src="{% static 'images/Vector.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+            {% endif %}
+        {% else %}
+        <img class="like-img register-btn" src="{% static 'images/Vector.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+        {% endif %}
         </div>
+        {% if product.photos.count > 1 %}
+        <div class="fotos_product_dop" style="display: flex;">
+        {% for photo in product.photos.all|slice:"1:4" %}
+            <img class="foto_product_dop" src="{{photo.photo.url}}" alt="Изображение продукта" />
+        {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+    <div class="fsecond_block_product">
+        <h1> {{product.name}} </h1>
         <p class="cost">Цена: {{product.price}}</p>
         <div class="detailed1">
             <button class="detailed color" type="button">Добавить в корзину</button>
         </div>
-        <div class="back">
-            <button onclick="history.back()">Назад</button>
-        </div>
+    </div>
     </section>
 
 {% endblock %}

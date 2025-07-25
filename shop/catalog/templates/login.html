@@ -2,10 +2,10 @@
 
 {% block styles %}
     {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/product_style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
 {% endblock %}
 
-{% block title %} Детали продукта {% endblock %}
+{% block title %} Вход в личный кабинет {% endblock %}
 
 {% block content %}
 
@@ -13,7 +13,10 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Войти</button>
+        <button class="button_entrance" type="submit">Войти</button>
     </form>
+    <div class="register">
+        <a class="register_button" href="{% url 'register' %}">Регистрация</a>
+    </div>
 
 {% endblock %}

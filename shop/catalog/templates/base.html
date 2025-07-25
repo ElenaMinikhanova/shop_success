@@ -49,7 +49,9 @@
             </div>
             {% else %}
             <div>
-              <img src="{% static 'images/Vector.png' %}">
+              <img class="like-img register-btn" src="{% static 'images/Vector.png' %}"
+                   data-product-id="{{ product.pk }}"
+                   style="cursor:pointer;">
             </div>
             {% endif %}
           </a>
@@ -61,7 +63,9 @@
             </div>
             {% else %}
             <div>
-              <img src="{% static 'images/Layer_2.png' %}">
+              <img class="like-img register-btn" src="{% static 'images/Layer_2.png' %}"
+                   data-product-id="{{ product.pk }}"
+                   style="cursor:pointer;">
             </div>
             {% endif %}
           </a>
@@ -119,30 +123,40 @@
           <div class="div_product">
 
             <div class="grup_product mobil">
-
                   {% for product in products|slice:":3" %}
-
                     <div class="product">
-                      {% for product in products %}
+                      <!-- Фото продукта -->
                       <div class="drawing" style="background-image:url('{{ product.photos.all.0.photo.url }}')">
-                          {% if user.is_authenticated %}
-                              {% if product.is_liked %}
-                                  <img class="like-img" src="{% static 'images/Vector1.png' %}"
-                                       data-product-id="{{ product.pk }}" style="cursor:pointer;">
-                              {% else %}
-                                  <img class="like-img" src="{% static 'images/Vector.png' %}"
-                                       data-product-id="{{ product.pk }}" style="cursor:pointer;">
-                              {% endif %}
-                          {% else %}
-                              <a href="{% url 'register' %}" style="cursor:pointer; text-decoration: none; color: white;">
-                                  <img class="like-img" src="{% static 'images/Vector.png' %}">
-                              </a>
-                          {% endif %}
+                      <!-- Лайк -->
+                      {% if user.is_authenticated %}
+                        {% if product.is_liked %}
+                            <img class="like-img" src="{% static 'images/Vector1.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+                        {% else %}
+                            <img class="like-img" src="{% static 'images/Vector.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+                        {% endif %}
+                      {% else %}
+                        <img class="like-img register-btn" src="{% static 'images/Vector.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+                      {% endif %}
                       </div>
-                      {% endfor %}
+
+                        <!-- Модальное окно -->
+                        <div class="registerModal">
+                          <div class="register_modal">
+                            <div class="info">Чтобы продолжить, пожалуйста, зарегистрируйтесь или войдите.</div>
+                            <div>
+                                <a class="a" href="{% url 'register' %}">Регистрация</a> | <a class="a" href="{% url 'login' %}">Войти</a>
+                            </div>
+                            <button class="button" class="closeModal">Закрыть</button>
+                          </div>
+                        </div>
+
                 <div class="product_info">
                   <div class="product_info1">
-                    <button class="input_hit" type="button">{{product.stock}}</button>
+                    {% if product.stock %}
+                        <div class="input_hit">{{product.stock}}</div>
+                    {% else %}
+                        <div class="input_empty">{{product.stock}}</div>
+                    {% endif %}
                     <div class="bouquet_name">
                       {{product.name}}
                     </div>
@@ -155,28 +169,46 @@
                   </div>
                 </div>
               </div>
-
               {% endfor %}
-
             </div>
 
             <div class="grup_product mobil">
+                  {% for product in products|slice:"3:6" %}
+                    <div class="product">
+                      <!-- Фото продукта -->
+                      <div class="drawing" style="background-image:url('{{ product.photos.all.0.photo.url }}')">
+                      <!-- Лайк -->
+                      {% if user.is_authenticated %}
+                        {% if product.is_liked %}
+                            <img class="like-img" src="{% static 'images/Vector1.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+                        {% else %}
+                            <img class="like-img" src="{% static 'images/Vector.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+                        {% endif %}
+                      {% else %}
+                        <img class="like-img register-btn" src="{% static 'images/Vector.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+                      {% endif %}
+                      </div>
 
-            {% for product in products|slice:"3:6" %}
+                        <!-- Модальное окно -->
+                        <div class="registerModal">
+                          <div class="register_modal">
+                            <div class="info">Чтобы продолжить, пожалуйста, зарегистрируйтесь или войдите.</div>
+                            <div>
+                                <a class="a" href="{% url 'register' %}">Регистрация</a> | <a class="a" href="{% url 'login' %}">Войти</a>
+                            </div>
+                            <button class="button" class="closeModal">Закрыть</button>
+                          </div>
+                        </div>
 
-              <div class="product">
-                <div class="drawing" style="background-image:url('{{product.photos.all.0.photo.url}}')">
-                  <a href="{% url 'register'%}" style="cursor:pointer; text-decoration: none; color: white;">
-                    <img class="like-img" src="{% static 'images/Vector.png' %}"
-                    data-product-id="{{product.pk}}"
-                    style="cursor:pointer;">
-                  </a>
-                </div>
                 <div class="product_info">
                   <div class="product_info1">
-                    <button class="input_hit" type="button">{{product.name}}</button>
+                    {% if product.stock %}
+                        <div class="input_hit">{{product.stock}}</div>
+                    {% else %}
+                        <div class="input_empty"></div>
+                    {% endif %}
                     <div class="bouquet_name">
-                      {{product.category}}
+                      {{product.name}}
                     </div>
                     <div class="cost">
                       {{product.price}}
@@ -187,28 +219,46 @@
                   </div>
                 </div>
               </div>
-
               {% endfor %}
-
             </div>
 
             <div class="grup_product mobil">
+                  {% for product in products|slice:"6:9" %}
+                    <div class="product">
+                      <!-- Фото продукта -->
+                      <div class="drawing" style="background-image:url('{{ product.photos.all.0.photo.url }}')">
+                      <!-- Лайк -->
+                      {% if user.is_authenticated %}
+                        {% if product.is_liked %}
+                            <img class="like-img" src="{% static 'images/Vector1.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+                        {% else %}
+                            <img class="like-img" src="{% static 'images/Vector.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+                        {% endif %}
+                      {% else %}
+                        <img class="like-img register-btn" src="{% static 'images/Vector.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+                      {% endif %}
+                      </div>
 
-            {% for product in products|slice:"6:9" %}
+                        <!-- Модальное окно -->
+                        <div class="registerModal">
+                          <div class="register_modal">
+                            <div class="info">Чтобы продолжить, пожалуйста, зарегистрируйтесь или войдите.</div>
+                            <div>
+                                <a class="a" href="{% url 'register' %}">Регистрация</a> | <a class="a" href="{% url 'login' %}">Войти</a>
+                            </div>
+                            <button class="button" class="closeModal">Закрыть</button>
+                          </div>
+                        </div>
 
-              <div class="product">
-                <div class="drawing" style="background-image:url('{{product.photos.all.0.photo.url}}')">
-                  <a href="{% url 'register'%}" style="cursor:pointer; text-decoration: none; color: white;">
-                    <img class="like-img" src="{% static 'images/Vector.png' %}"
-                    data-product-id="{{product.pk}}"
-                    style="cursor:pointer;">
-                  </a>
-                </div>
                 <div class="product_info">
                   <div class="product_info1">
-                    <button class="input_hit" type="button">{{product.name}}</button>
+                    {% if product.stock %}
+                        <div class="input_hit">{{product.stock}}</div>
+                    {% else %}
+                        <div></div>
+                    {% endif %}
                     <div class="bouquet_name">
-                      {{product.category}}
+                      {{product.name}}
                     </div>
                     <div class="cost">
                       {{product.price}}
@@ -219,9 +269,7 @@
                   </div>
                 </div>
               </div>
-
               {% endfor %}
-
             </div>
               </div>
             </div>
@@ -270,6 +318,11 @@
 <script>
   const likedImageUrl = '{% static "images/Vector1.png" %}';
   const unlikedImageUrl = '{% static "images/Vector.png" %}';
+  {% if user.is_authenticated %}
+      var isAuthenticated = true;
+  {% else %}
+      var isAuthenticated = false;
+  {% endif %}
 </script>
 <script src="{% static 'js/skript.js' %}"></script>
 </body>

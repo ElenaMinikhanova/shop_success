@@ -18,6 +18,11 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     inlines = [PhotoProductInline]
 
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        form.base_fields['stock'].required = False
+        return form
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'parent')

@@ -26,66 +26,94 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.like-img').forEach(img => {
-        img.addEventListener('click', () => {
-            const productId = img.dataset.productId; // Получаем ID товара из data-атрибута
-            // Отправляем POST-запрос на сервер
-            fetch('/toggle-like/', {
-                method: 'POST',
-                headers: {
-                    'X-CSRFToken': getCookie('csrftoken'), // Передача CSRF-токена
-                    'Content-Type': 'application/json', // Тип данных
-                },
-                body: JSON.stringify({product_id: productId}), // Передача ID продукта
-            })
-            .then(response => response.json()) // Обработка ответа как JSON
-            .then(data => {
-                // Меняем изображение в зависимости от статуса
-                const timestamp = new Date().getTime();
-                if (data.status === 'liked') {
-                    img.src = likedImageUrl + '?t=' + timestamp;
-                } else {
-                    img.src = unlikedImageUrl + '?t=' + timestamp;
-                }
-                location.reload(); // перезагружает страницу
+if (isAuthenticated) {
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.like-img').forEach(img => {
+            img.addEventListener('click', () => {
+                const productId = img.dataset.productId; // Получаем ID товара из data-атрибута
+                // Отправляем POST-запрос на сервер
+                fetch('/toggle-like/', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': getCookie('csrftoken'), // Передача CSRF-токена
+                        'Content-Type': 'application/json', // Тип данных
+                    },
+                    body: JSON.stringify({product_id: productId}), // Передача ID продукта
+                })
+                .then(response => response.json()) // Обработка ответа как JSON
+                .then(data => {
+                    // Меняем изображение в зависимости от статуса
+                    const timestamp = new Date().getTime();
+                    if (data.status === 'liked') {
+                        img.src = likedImageUrl + '?t=' + timestamp;
+                    } else {
+                        img.src = unlikedImageUrl + '?t=' + timestamp;
+                    }
+                    location.reload(); // перезагружает страницу
+                });
             });
         });
     });
-});
 
-// Функция для получения CSRF-токена из cookies
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i=0; i<cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length+1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length+1));
-                break;
+    // Функция для получения CSRF-токена из cookies
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i=0; i<cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length+1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length+1));
+                    break;
+                }
             }
         }
+        return cookieValue;
     }
-    return cookieValue;
+
+    // Обеспечим выполнение скрипта после загрузки DOM
+    document.addEventListener('DOMContentLoaded', function() {
+        const profileLink = document.querySelector('.profile-link');
+
+        if (profileLink) {
+            const menu = profileLink.querySelector('.burger-menu');
+
+            profileLink.addEventListener('mouseenter', function() {
+                if (menu) {
+                    menu.style.display = 'block';
+                }
+            });
+            profileLink.addEventListener('mouseleave', function() {
+                if (menu) {
+                    menu.style.display = 'none';
+                }
+            });
+        }
+    });
 }
 
-// Обеспечим выполнение скрипта после загрузки DOM
-document.addEventListener('DOMContentLoaded', function() {
-    const profileLink = document.querySelector('.profile-link');
-
-    if (profileLink) {
-        const menu = profileLink.querySelector('.burger-menu');
-
-        profileLink.addEventListener('mouseenter', function() {
-            if (menu) {
-                menu.style.display = 'block';
-            }
+if (!isAuthenticated) {
+    document.addEventListener('DOMContentLoaded', function() {
+      const modal = document.querySelector('.registerModal');
+      const closeBtn = document.querySelector('closeModal')
+      // Обработчик для открытия модального окна
+      document.querySelectorAll('.register-btn').forEach(function(elem) {
+        elem.addEventListener('click', function(e) {
+          e.preventDefault();
+          modal.style.display = 'block';
         });
-        profileLink.addEventListener('mouseleave', function() {
-            if (menu) {
-                menu.style.display = 'none';
-            }
+      });
+      // Обработчик для закрытия модального окна
+      if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+          modal.style.display = 'none';
         });
-    }
-});
+      }
+      // Также можно закрывать при клике вне окна
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = 'none';
+        }
+      }
+    });
+}

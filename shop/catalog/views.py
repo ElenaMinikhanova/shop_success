@@ -8,8 +8,6 @@ from django.http import HttpResponseNotAllowed
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
 
 class PostListView(ListView):
     model = Product
@@ -48,10 +46,13 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
+        product = self.object
         if user.is_authenticated:
+            context['liked'] = user.user_likes.filter(like=product).exists()
             context['like_count'] = user.user_likes.count()
             context['basket_count'] = user.user_products.count()
         else:
+            context['liked'] = False
             context['like_count'] = 0
             context['basket_count'] = 0
         return context

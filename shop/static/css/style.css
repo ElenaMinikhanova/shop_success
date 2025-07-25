@@ -48,7 +48,7 @@ body {
 
 .catalog {
     background-color: #EAEAEA;
-    height: fit-content;
+    justify-content: flex-start;
 }
 .today {
     display: flex;
@@ -161,13 +161,21 @@ body {
     gap: 10px;
 }
 .input_hit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: "Rubik";
     font-size: 14px;
     height: 30px;
     width: 145px;
+    border: 1px solid #000000;
     border-radius: 50px;
     background-color: #FFFFFF;
     font-weight: 500;
+}
+.input_empty {
+    height: 30px;
+    width: 145px;
 }
 .bouquet_name {
     height: 27px;
@@ -371,7 +379,46 @@ textarea {
 .menu {
     display: none;
 }
-
+.register_modal {
+    background:#78AC47;
+    border-radius: 5%;
+    margin: 10% auto;
+    padding:20px;
+    width:270px;
+    height:180px;
+    position:relative;
+    border: 1px solid #FFFDFD;
+    color: #FFFDFD;
+    font-family: "Rubik";
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+.registerModal {
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+.a {
+    cursor:pointer;
+    text-decoration: none;
+    color: white;
+}
+.button {
+    border: none;
+    background-color: #78AC47;
+    color: #FFFFFF;
+    cursor:pointer;
+}
+.info {
+    font-size: 20px;
+}
 
 @media (max-width: 1270px){
     .product_3 {
@@ -595,5 +642,4 @@ textarea {
         border-bottom: 1px solid #BC5B90;
     }
 }
-
 

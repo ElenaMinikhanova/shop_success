@@ -1,0 +1,15 @@
+.button_entrance {
+    width:100px;
+    height:30px;
+}
+.register {
+    width:100px;
+    height:30px;
+    background-color: #EAEAEA;
+    border: 1px solid black;
+}
+.register_button {
+    cursor:pointer;
+    text-decoration: none;
+    color: black;
+}

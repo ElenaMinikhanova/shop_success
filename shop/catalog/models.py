@@ -38,7 +38,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='Категория')
-    stock = models.ForeignKey(Stocks, on_delete=models.SET_NULL, verbose_name='Акция', null=True)
+    stock = models.ForeignKey(Stocks, on_delete=models.SET_NULL, verbose_name='Акция', null=True, default=None)
     name = models.CharField(max_length=100, verbose_name='Название')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
     description = models.TextField(verbose_name='Описание')
@@ -57,6 +57,7 @@ class UserProduct(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_products')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_users')
     date_added = models.DateTimeField(auto_now_add=True)
+    count = models.IntegerField(default=1)
 
     class Meta:
         unique_together = ('user', 'product')
