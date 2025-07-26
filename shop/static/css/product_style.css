@@ -13,8 +13,9 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin-top: 132px;
+    margin-top: 120px;
     width: 712px;
+    gap: 20px;
 }
 .back {
     display: flex;
@@ -30,6 +31,7 @@
     width: 12.5px;
 }
 .catalog_product {
+    background-color: #E7E9E6;
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -50,33 +52,109 @@
 }
 .fotos_product_dop {
     border-radius:10%
+    position: relative;
 }
 .foto_product_dop {
     display: flex;
     flex-direction: row;
+    position: relative;
+    transition: transform 0.3s ease, z-index 0.3s ease;
+    cursor: pointer;
+    z-index: 1;
     width: 159.16px;
     height: 140px;
     margin-right: 13.26px;
 }
-.detailed1 {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    height: 50px;
-    width: 350px;
+.foto_product_dop.enlarged {
+    transform: scale(2);
+    z-index: 9999;
+    position: relative;
+    transition: transform 0.3s ease;
 }
-.detailed {
-    border: none;
-    color: #FFFDFD;
-    font-family: "Rubik";
-    font-size: 20px;
-    height: 100%;
-    width: 100%;
-    border-bottom: 1px solid #78AC47;
-    border-radius: 50px;
-    background-color: #78AC47;
+.basket {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.basket_count {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: 700;
+    border: none;
+    color: #FFFDFD;
+    font-family: "Rubik";
+    font-size: 16px;
+    height: 64px;
+    width: 208px;
+    border-bottom: 1px solid #78AC47;
+    border-radius: 50px;
+    background-color: #78AC47;
+    font-weight: 500;
+}
+.basket_put {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    color: #FFFDFD;
+    font-family: "Rubik";
+    font-size: 26px;
+    height: 64px;
+    width: 397px;
+    border-bottom: 1px solid #78AC47;
+    border-radius: 50px;
+    background-color: #78AC47;
+    font-weight: 500;
+}
+.name_stock {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 45px;
+}
+.name_product {
+    font-family: "Vetrino";
+    font-size: 40px;
+    font-weight: 400;
+}
+.stock_product {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Rubik";
+    font-size: 14px;
+    height: 30px;
+    width: 145px;
+    border: 1px solid #000000;
+    border-radius: 50px;
+    background-color: #FFFFFF;
+    font-weight: 500;
+}
+.price {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.price_product {
+    font-family: "Rubik";
+    font-size: 32px;
+    font-weight: 500;
+}
+.price_product_stock {
+    font-family: "Rubik";
+    font-size: 20px;
+    font-weight: 400;
+}
+.strikethrough {
+    text-decoration: line-through;
+}
+.description {
+    font-family: "Vetrino";
+    font-size: 34px;
+    font-weight: 400;
+}
+.description_text {
+    font-family: "Rubik";
+    font-size: 20px;
+    font-weight: 400;
 }

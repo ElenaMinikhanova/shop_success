@@ -34,12 +34,69 @@
         {% endif %}
     </div>
     <div class="fsecond_block_product">
-        <h1> {{product.name}} </h1>
-        <p class="cost">Цена: {{product.price}}</p>
-        <div class="detailed1">
-            <button class="detailed color" type="button">Добавить в корзину</button>
+        <div class="name_stock">
+            <h1 class="name_product"> {{product.name}} </h1>
+            {% if product.stock %}
+            <div class="stock_product"> {{product.stock}} </div>
+            {% else %}
+            <div></div>
+            {% endif %}
+        </div>
+
+        {% load price_extras %}
+
+        <div class="price">
+            {% if product.stock %}
+            {% with discount_percentage=product.stock.discount|add:"0" %}
+            {% with original_price=product.price %}
+            {% with discount_amount=original_price|mul:discount_percentage|div:100 %}
+            {% with discounted_price=original_price|subtract:discount_amount %}
+            <div class="price_product"> {{ discounted_price|floatformat:0 }} ₽</div>
+            {% endwith %}
+            {% endwith %}
+            {% endwith %}
+            <div class="price_product_stock"><span class="strikethrough">{{ product.price|floatformat:0 }}</span> ₽</div>
+            {% endwith %}
+            {% else %}
+            <div class="price_product"> {{ product.price|floatformat:0 }} ₽</div>
+            {% endif %}
+        </div>
+
+        <div class="info_product">
+            <div class="description">Описание</div>
+            <div class="description_text">{{product.description}}</div>
+        </div>
+
+        <div class="basket">
+            <button class="basket_count" type="button">Добавить в корзину</button>
+            <button class="basket_put" type="button">В корзину</button>
         </div>
     </div>
     </section>
+    <script>
+        const images = document.querySelectorAll('.foto_product_dop');
+
+        images.forEach((img) => {
+          img.addEventListener('click', () => {
+            // Увеличиваем картинку
+            img.classList.toggle('enlarged');
+
+            // Если увеличилась — добавляем обработчик на весь документ
+            if (img.classList.contains('enlarged')) {
+              document.addEventListener('click', outsideClickListener);
+            } else {
+              document.removeEventListener('click', outsideClickListener);
+            }
+
+            // Функция для проверки клика вне картинки
+            function outsideClickListener(e) {
+              if (!img.contains(e.target)) {
+                img.classList.remove('enlarged');
+                document.removeEventListener('click', outsideClickListener);
+              }
+            }
+          });
+        });
+    </script>
 
 {% endblock %}
