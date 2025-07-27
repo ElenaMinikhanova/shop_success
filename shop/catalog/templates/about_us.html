@@ -60,55 +60,92 @@
             <div class="line"></div>
           </div>
 
-          <div class="reviews">
-          <div class="reviews1">
-            <div class="pole1">
-                <img class="img_pole1" src="{% static 'images/img_pole1.png' %}">
-                <div class="sum_text1">
-                <p class="text_reviews"><strong>Елена</strong></p>
-                <p class="text_reviews">Какой же яркий и насыщенный букет, впервые вижу розы
-с настолько цветастыми лепесточками, даже сначала подумала, что покрашены, но это
-не так. Поставила сразу в воду и цветы потом еще долго не увядали.
-</p>
-                </div>
+
+
+        <div class="reviews-wrapper">
+            <!-- Стрелка влево -->
+            <div class="arrow_left">
+              <button id="scroll-left">&lt</button>
             </div>
 
-            <div class="pole2">
-             <img class="img_pole2" src="{% static 'images/img_pole2.png' %}">
+          <!-- Контейнер отзывов -->
+          <div class="reviews" id="scroll-container">
+            <div class="reviews1">
+              <div class="pole1">
+                <img class="img_pole1" src="{% static 'images/img_pole1.png' %}">
+                <div class="sum_text1">
+                  <p class="text_reviews"><strong>Елена</strong></p>
+                  <p class="text_reviews">Какой же яркий и насыщенный букет, впервые вижу розы
+        с настолько цветастыми лепесточками, даже сначала подумала, что покрашены, но это
+        не так. Поставила сразу в воду и цветы потом еще долго не увядали.
+        </p>
+                </div>
+              </div>
+
+              <div class="pole2">
+                <img class="img_pole2" src="{% static 'images/img_pole2.png' %}">
                 <div class="sum_text2">
-                <p class="text_reviews"><strong>Дмитрий</strong></p>
-                <p class="text_reviews">Жене понравился, спасибо!</p>
+                  <p class="text_reviews"><strong>Дмитрий</strong></p>
+                  <p class="text_reviews">Жене понравился, спасибо!</p>
                 </div>
-            </div>
-            <div class="pole3">
-             <img class="img_pole3" src="{% static 'images/img_pole3.png' %}">
+              </div>
+              <div class="pole3">
+                <img class="img_pole3" src="{% static 'images/img_pole3.png' %}">
                 <div class="sum_text3">
-                <p class="text_reviews"><strong>Ольга</strong></p>
-                <p class="text_reviews">Какой же яркий и насыщенный букет, впервые вижу розы с настолько цветастыми лепесточками, даже сначала подумала, что покрашены, но это не так. </p>
+                  <p class="text_reviews"><strong>Ольга</strong></p>
+                  <p class="text_reviews">Какой же яркий и насыщенный букет, впервые вижу розы с настолько цветастыми лепесточками, даже сначала подумала, что покрашены, но это не так. </p>
                 </div>
+              </div>
             </div>
-          </div>
-          <div class="reviews1">
-            <div class="pole4">
-             <img class="img_pole4" src="{% static 'images/img_pole4.png' %}">
+            <div class="reviews1">
+              <div class="pole4">
+                <img class="img_pole4" src="{% static 'images/img_pole4.png' %}">
                 <div class="sum_text4">
-                <p class="text_reviews"><strong>Екатерина</strong></p>
-                <p class="text_reviews">Очень красивые и крупные розы. Цена адекватная.</p>
+                  <p class="text_reviews"><strong>Екатерина</strong></p>
+                  <p class="text_reviews">Очень красивые и крупные розы. Цена адекватная.</p>
                 </div>
-            </div>
-            <div class="pole4">
-             <img class="img_pole4" src="{% static 'images/img_pole44.png' %}">
+              </div>
+              <div class="pole4">
+                <img class="img_pole4" src="{% static 'images/img_pole44.png' %}">
                 <div class="sum_text4">
-                <p class="text_reviews"><strong>Федот</strong></p>
-                <p class="text_reviews"> От души благодарствую! </p>
+                  <p class="text_reviews"><strong>Федот</strong></p>
+                  <p class="text_reviews">От души благодарствую!</p>
                 </div>
+              </div>
             </div>
           </div>
+
+          <!-- Стрелка вправо -->
+          <div class="arrow_right">
+            <button id="scroll-right">&gt</button>
           </div>
+        </div>
 
         </div>
       </div>
     </section>
+
+
+<script>
+  const container = document.getElementById('scroll-container');
+  document.getElementById('scroll-left').onclick = () => {
+    container.scrollBy({ left: -220, behavior: 'smooth' });
+  };
+  document.getElementById('scroll-right').onclick = () => {
+    container.scrollBy({ left: 220, behavior: 'smooth' });
+  };
+
+  window.onload = function() {
+    const container = document.getElementById('scroll-container');
+
+    // Ждём, пока контент полностью загрузится
+    const contentWidth = container.scrollWidth; // Полная ширина содержимого
+    const containerWidth = container.clientWidth; // Ширина контейнера
+
+    // Устанавливаем скролл на середину
+    container.scrollLeft = (contentWidth - containerWidth) / 2;
+  };
+</script>
 
     {% include 'feedback.html' %}
 

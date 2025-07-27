@@ -9,10 +9,10 @@
 {% block content %}
     <section class="catalog_product">
     <div class="first_block_product">
-        <a href="{{ request.META.HTTP_REFERER|default:'/' }}" class="back">
+        <button class="back" onclick="window.history.back();">
             <img class="back_img" src="{% static 'images/Vector(1).png' %}">
             <div>Назад</div>
-        </a>
+        </button>
         <div class="foto_product" style="background-image:url('{{ product.photos.all.0.photo.url }}')">
         <!-- Лайк -->
         {% if user.is_authenticated %}
@@ -67,36 +67,91 @@
             <div class="description_text">{{product.description}}</div>
         </div>
 
-        <div class="basket">
-            <button class="basket_count" type="button">Добавить в корзину</button>
-            <button class="basket_put" type="button">В корзину</button>
+        <div class="basket_product">
+            {% if user.is_authenticated %}
+                {% if basket %}
+                    <div class="basket-item" data-product-id="{{ product.id }}">
+                        <div class="quantity-controls">
+                            <button class="decrease" data-product-id="{{ product.id }}">-</button>
+                            <!-- Показываем текущее количество -->
+                            <div class="quantity" data-product-id="{{ product.id }}">{{ user_product_count }}</div>
+                            <button class="increase" data-product-id="{{ product.id }}">+</button>
+                        </div>
+                    </div>
+                {% else %}
+                    <button class="basket_put_product" type="button" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}">
+                        В корзину
+                    </button>
+                {% endif %}
+            {% else %}
+                <button class="basket_put_product register-btn" type="button" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}">
+                    В корзину
+                </button>
+            {% endif %}
         </div>
+
     </div>
     </section>
+
+
+    <div class="look">
+        <div class="look_text_blok">
+          <div class="look_text">Смотрите также</div>
+          <div class="empty"></div>
+        </div>
+        <div class="grup_product mobil">
+            {% for product in recommendations %}
+            <div class="product">
+                <!-- Фото продукта -->
+                <div class="drawing" style="background-image:url('{{ product.photos.all.0.photo.url }}')">
+                    <!-- Лайк -->
+                    {% if user.is_authenticated %}
+                        {% if product.is_liked %}
+                        <img class="like-img" src="{% static 'images/Vector1.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+                        {% else %}
+                        <img class="like-img" src="{% static 'images/Vector.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+                        {% endif %}
+                    {% else %}
+                    <img class="like-img register-btn" src="{% static 'images/Vector.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+            {% endif %}
+                </div>
+                <!-- Модальное окно -->
+                <div class="registerModal">
+                    <div class="register_modal">
+                        <div class="info">Чтобы продолжить, пожалуйста, зарегистрируйтесь или войдите.</div>
+                        <div>
+                            <a class="a" href="{% url 'register' %}">Регистрация</a> | <a class="a" href="{% url 'login' %}">Войти</a>
+                        </div>
+                        <button class="button" class="closeModal">Закрыть</button>
+                    </div>
+                </div>
+                <div class="product_info">
+                    <div class="product_info1">
+                        {% if product.stock %}
+                        <div class="input_hit">{{product.stock}}</div>
+                        {% else %}
+                        <div class="input_empty">{{product.stock}}</div>
+                        {% endif %}
+                        <div class="bouquet_name">
+                            {{product.name}}
+                        </div>
+                        <div class="cost">
+                            {{product.price}}
+                        </div>
+                    </div>
+                    <div class="detailed1">
+                        <a href="{% url 'detail' product.pk %}" style="cursor:pointer; text-decoration: none; color: white;" class="detailed color">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
     <script>
-        const images = document.querySelectorAll('.foto_product_dop');
-
-        images.forEach((img) => {
-          img.addEventListener('click', () => {
-            // Увеличиваем картинку
-            img.classList.toggle('enlarged');
-
-            // Если увеличилась — добавляем обработчик на весь документ
-            if (img.classList.contains('enlarged')) {
-              document.addEventListener('click', outsideClickListener);
-            } else {
-              document.removeEventListener('click', outsideClickListener);
-            }
-
-            // Функция для проверки клика вне картинки
-            function outsideClickListener(e) {
-              if (!img.contains(e.target)) {
-                img.classList.remove('enlarged');
-                document.removeEventListener('click', outsideClickListener);
-              }
-            }
-          });
-        });
+        const updateBasketBaseUrl = "/update-basket/";
+        const addToBasketUrl = "{% url 'add_to_basket' %}";
     </script>
+    <script src="{% static 'js/product.js' %}"></script>
 
 {% endblock %}

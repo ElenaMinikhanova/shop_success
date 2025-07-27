@@ -1,6 +1,6 @@
 from django.urls import path
 from django.views.generic import TemplateView
-from .views import PostListView, PostDetailView, RegisterView, ProfileView, ToggleLikeView, AboutUs, ExitView
+from .views import PostListView, PostDetailView, RegisterView, ProfileView, ToggleLikeView, AboutUs, ExitView, AddToBasketView, UpdateBasketView
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView, LogoutView
 
@@ -13,4 +13,6 @@ urlpatterns = [
     path('accounts/login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('accounts/profile/', ProfileView.as_view(), name='profile'),
     path('toggle-like/', ToggleLikeView.as_view(), name='toggle-like'),
+    path('add_to_basket/', AddToBasketView.as_view(), name='add_to_basket'),
+    path('update-basket/<int:pk>/', UpdateBasketView.as_view(), name='update_basket'),
 ]
