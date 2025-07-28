@@ -22,7 +22,7 @@ images.forEach((img) => {
   });
 });
 
-
+if (isAuthenticated) {
 document.addEventListener('DOMContentLoaded', function() {
     // Обработка кнопки "В корзину"
     document.querySelectorAll('.basket_put_product').forEach(button => {
@@ -92,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         location.reload();
     }
-
     function removeBasketDisplay(productId) {
         const container = document.querySelector(`.basket-item[data-product-id="${productId}"]`);
         if (container) {
@@ -101,4 +100,4 @@ document.addEventListener('DOMContentLoaded', function() {
         // Перезагружаем страницу, чтобы обновить отображение
         location.reload();
     }
-});
+});}

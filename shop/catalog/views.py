@@ -72,7 +72,6 @@ class PostDetailView(DetailView):
             category=product.category
         ).exclude(id=product.id)[:3]
 
-        # ==============================
         # Добавляем атрибут is_liked для рекомендаций
         recommendations = list(same_category_products)
         if user.is_authenticated:
@@ -85,7 +84,6 @@ class PostDetailView(DetailView):
                 prod.is_liked = False
 
         context['recommendations'] = recommendations
-        # ==============================
 
         return context
 
@@ -205,3 +203,47 @@ class ExitView(View):
         return redirect('view')  # укажите URL или имя маршрута для редиректа
     def get(self, request, *args, **kwargs):
         return HttpResponseNotAllowed(['POST'])
+
+class PostBasket(ListView):
+    model = Product
+    template_name = 'basket.html'
+    context_object_name = 'products_basket'
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_authenticated:
+            # Получаем список ID продуктов, добавленных в корзину этим пользователем
+            product_ids_in_basket = user.user_products.values_list('product_id', flat=True)
+            # Фильтруем продукты по этим ID
+            qs = Product.objects.filter(id__in=product_ids_in_basket)
+        else:
+            # Если не авторизован, возвращаем пустой queryset
+            qs = Product.objects.none()
+
+        # Передать список liked ID для каждого пользователя
+        if user.is_authenticated:
+            liked_ids = set(user.user_likes.values_list('like_id', flat=True))
+        else:
+            liked_ids = set()
+
+        # добавляем атрибут is_liked для каждого продукта
+        for product in qs:
+            product.is_liked = product.id in liked_ids
+
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_authenticated:
+            user_products = user.user_products.select_related('product')
+            context['user_products'] = user_products
+            context['like_count'] = user.user_likes.count()
+            context['basket_count'] = user.user_products.count()
+        else:
+            context['user_products'] = []
+            context['like_count'] = 0
+            context['basket_count'] = 0
+        return context
+
+

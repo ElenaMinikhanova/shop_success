@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/basket.css' %}">
+{% endblock %}
+
+{% block title %} Корзина {% endblock %}
+{% block content %}
+
+{% include 'name.html' %}
+
+<section class="section">
+    <div class="basket_blok">
+        <div class="basket_text"> Корзина </div>
+        <div class="line_basket"></div>
+    </div>
+    <div class="bucket_block">
+        <div class="first_bucket_block">
+            {% if user_products %}
+                {% for user_product in user_products %}
+                <div class="user_product_blok">
+                    <div class="product_bucket_foto">
+
+                        <div class="foto_product" style="background-image:url('{{ user_product.product.photos.all.0.photo.url }}')">
+                        <!-- Лайк -->
+                        {% if user.is_authenticated %}
+                          {% if product.is_liked %}
+                              <img class="like-img" src="{% static 'images/Vector1.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+                          {% else %}
+                              <img class="like-img" src="{% static 'images/Vector.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+                          {% endif %}
+                        {% else %}
+                          <img class="like-img register-btn" src="{% static 'images/Vector.png' %}" data-product-id="{{ product.pk }}" style="cursor:pointer;">
+                        {% endif %}
+                        </div>
+
+                    </div>
+                    <div class="product_info_bucket">
+                        {{user_product.product.name}}
+                    </div>
+                    <div class="product_price">
+                        {{user_product.product.price}}
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div>
+                    Корзина пуста
+                </div>
+            {% endif %}
+        </div>
+        <div class="second_bucket_block">
+
+        </div>
+
+    </div>
+
+
+
+</section>
+<script src="{% static 'js/skript.js' %}"></script>
+{% include 'feedback.html' %}
+{% endblock %}

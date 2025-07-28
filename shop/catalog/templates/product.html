@@ -7,12 +7,25 @@
 
 {% block title %} Детали продукта {% endblock %}
 {% block content %}
+
+{% include 'name.html' %}
+
     <section class="catalog_product">
+    <div class="div">
     <div class="first_block_product">
         <button class="back" onclick="window.history.back();">
             <img class="back_img" src="{% static 'images/Vector(1).png' %}">
             <div>Назад</div>
         </button>
+
+        <div class="stock_mobil">
+            {% if product.stock %}
+            <div class="stock_product_mobil"> {{product.stock}} </div>
+            {% else %}
+            <div></div>
+            {% endif %}
+        </div>
+
         <div class="foto_product" style="background-image:url('{{ product.photos.all.0.photo.url }}')">
         <!-- Лайк -->
         {% if user.is_authenticated %}
@@ -79,20 +92,18 @@
                         </div>
                     </div>
                 {% else %}
-                    <button class="basket_put_product" type="button" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}">
+                    <button class="basket_put_product color" type="button" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}">
                         В корзину
                     </button>
                 {% endif %}
             {% else %}
-                <button class="basket_put_product register-btn" type="button" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}">
+                <button class="basket_put_product register-btn color" type="button" data-product-id="{{ product.id }}" data-product-name="{{ product.name }}">
                     В корзину
                 </button>
             {% endif %}
         </div>
-
     </div>
-    </section>
-
+    </div>
 
     <div class="look">
         <div class="look_text_blok">
@@ -122,7 +133,7 @@
                         <div>
                             <a class="a" href="{% url 'register' %}">Регистрация</a> | <a class="a" href="{% url 'login' %}">Войти</a>
                         </div>
-                        <button class="button" class="closeModal">Закрыть</button>
+                        <button class="button closeModal" type="button">Закрыть</button>
                     </div>
                 </div>
                 <div class="product_info">
@@ -148,9 +159,18 @@
         </div>
     </div>
 
+    </section>
+
+    {% include 'feedback.html' %}
+
     <script>
         const updateBasketBaseUrl = "/update-basket/";
         const addToBasketUrl = "{% url 'add_to_basket' %}";
+          {% if user.is_authenticated %}
+              var isAuthenticated = true;
+          {% else %}
+              var isAuthenticated = false;
+          {% endif %}
     </script>
     <script src="{% static 'js/product.js' %}"></script>
 

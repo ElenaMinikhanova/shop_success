@@ -1,0 +1,81 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    background-color: #EAEAEA;
+}
+.basket_blok {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 135px;
+    gap: 20px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+.basket_text {
+    font-family: "Vetrino";
+    font-size: 40px;
+    width: 178px;
+    font-weight: 400;
+    line-height: 48px;
+}
+.line_basket {
+    border-bottom: 1px solid #000000;
+    width: 1024px;
+}
+.bucket_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+.first_bucket_block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.second_bucket_block {
+    width: 400px;
+}
+.user_product_blok {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 816px;
+    height: 212px;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    gap: 20px;
+}
+.product_bucket_foto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 192px;
+    height: 192px;
+}
+.foto_product {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding-top: 20px;
+    padding-right: 20px;
+    width: 192px;
+    height: 192px;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+}
+.product_info_bucket {
+    width: 382px;
+    height: 172px;
+    background-color: green;
+}
+.product_price {
+    width: 179px;
+    height: 151px;
+    background-color: red;
+}
+

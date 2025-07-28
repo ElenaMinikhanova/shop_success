@@ -55,7 +55,7 @@
             </div>
             {% endif %}
           </a>
-          <a class="vector" href="{% url 'view' %}">
+          <a class="vector" href="{% url 'basket' %}">
             {% if user.is_authenticated %}
             <div class="basket_count">
               <img src="{% static 'images/Layer_2.png' %}">
@@ -84,7 +84,7 @@
                 </div>
             </def>
           {% else %}
-          <a href="{% url 'login'%}" style="cursor:pointer; text-decoration: none; color: white;">
+          <a href="{% url 'login' %}?next={{ request.path }}" style="cursor:pointer; text-decoration: none; color: white;">
             <img src="{% static 'images/avtorizovatsya_qcmrbxi1b3yd 2.png' %}">
           </a>
           {% endif %}
@@ -97,7 +97,24 @@
         <li><a href="{% url 'about_us' %}">О нас</a></li>
         <li><a href="#">Доставка</a></li>
         <li><a href="#">Оплата</a></li>
-        <li><a href="#">Корзина</a></li>
+        <li>
+            <a class="vector" href="{% url 'basket' %}">
+            {% if user.is_authenticated %}
+            <div class="basket_count">
+              <div>Корзина</div>
+              <img src="{% static 'images/Layer_2.png' %}">
+              <div class="count_basket">{{ basket_count }}</div>
+            </div>
+            {% else %}
+            <div class="register-btn">
+              <div>Корзина</div>
+              <img class="like-img" src="{% static 'images/Layer_2.png' %}"
+                   data-product-id="{{ product.pk }}"
+                   style="cursor:pointer;">
+            </div>
+            {% endif %}
+          </a>
+        </li>
         <li><a id="favoritesPageLink1"  href="{% url 'view' %}">Избранное</a></li>
       </ul>
       </nav>
@@ -144,9 +161,9 @@
                           <div class="register_modal">
                             <div class="info">Чтобы продолжить, пожалуйста, зарегистрируйтесь или войдите.</div>
                             <div>
-                                <a class="a" href="{% url 'register' %}">Регистрация</a> | <a class="a" href="{% url 'login' %}">Войти</a>
+                                <a class="a" href="{% url 'register' %}?next={{ request.path }}">Регистрация</a> | <a class="a" href="{% url 'login' %}?next={{ request.path }}">Войти</a>
                             </div>
-                            <button class="button" class="closeModal">Закрыть</button>
+                            <button class="button closeModal" type="button">Закрыть</button>
                           </div>
                         </div>
 
@@ -194,7 +211,7 @@
                           <div class="register_modal">
                             <div class="info">Чтобы продолжить, пожалуйста, зарегистрируйтесь или войдите.</div>
                             <div>
-                                <a class="a" href="{% url 'register' %}">Регистрация</a> | <a class="a" href="{% url 'login' %}">Войти</a>
+                                <a class="a" href="{% url 'register' %}?next={{ request.path }}">Регистрация</a> | <a class="a" href="{% url 'login' %}?next={{ request.path }}">Войти</a>
                             </div>
                             <button class="button" class="closeModal">Закрыть</button>
                           </div>
@@ -244,7 +261,7 @@
                           <div class="register_modal">
                             <div class="info">Чтобы продолжить, пожалуйста, зарегистрируйтесь или войдите.</div>
                             <div>
-                                <a class="a" href="{% url 'register' %}">Регистрация</a> | <a class="a" href="{% url 'login' %}">Войти</a>
+                                <a class="a" href="{% url 'register' %}?next={{ request.path }}">Регистрация</a> | <a class="a" href="{% url 'login' %}?next={{ request.path }}">Войти</a>
                             </div>
                             <button class="button" class="closeModal">Закрыть</button>
                           </div>

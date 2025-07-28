@@ -6,8 +6,13 @@ from django.dispatch import receiver
 # Create your models here.
 class Stocks(models.Model):
     CATEGORY_CHOICES = [
+        ('3', '3%'),
+        ('5', '5%'),
         ('10', '10%'),
+        ('15', '15%'),
         ('20', '20%'),
+        ('30', '30%'),
+        ('50', '50%'),
     ]
     name = models.CharField(max_length=50, verbose_name='Название Акции')
     discount = models.CharField(max_length=50, choices=CATEGORY_CHOICES, verbose_name='Процент скидки')

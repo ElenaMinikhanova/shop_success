@@ -95,7 +95,7 @@ if (isAuthenticated) {
 if (!isAuthenticated) {
     document.addEventListener('DOMContentLoaded', function() {
       const modal = document.querySelector('.registerModal');
-      const closeBtn = document.querySelector('closeModal')
+      const closeBtn = document.querySelector('.closeModal')
       // Обработчик для открытия модального окна
       document.querySelectorAll('.register-btn').forEach(function(elem) {
         elem.addEventListener('click', function(e) {
