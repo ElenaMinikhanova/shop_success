@@ -7,6 +7,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import RegistrationForm
 import json
+from django.utils.decorators import method_decorator
+from django.views.decorators.http import require_POST
 from django.http import HttpResponseNotAllowed
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
@@ -72,7 +74,6 @@ class PostDetailView(DetailView):
             category=product.category
         ).exclude(id=product.id)[:3]
 
-        # ==============================
         # Добавляем атрибут is_liked для рекомендаций
         recommendations = list(same_category_products)
         if user.is_authenticated:
@@ -85,7 +86,6 @@ class PostDetailView(DetailView):
                 prod.is_liked = False
 
         context['recommendations'] = recommendations
-        # ==============================
 
         return context
 
@@ -205,3 +205,86 @@ class ExitView(View):
         return redirect('view')  # укажите URL или имя маршрута для редиректа
     def get(self, request, *args, **kwargs):
         return HttpResponseNotAllowed(['POST'])
+
+
+
+class BasketView(LoginRequiredMixin, ListView):
+    model = UserProduct
+    template_name = 'basket.html'
+    context_object_name = 'user_products'
+
+    def get_queryset(self):
+        user = self.request.user
+        user_products_qs = user.user_products.select_related('product')
+        liked_ids = set(user.user_likes.values_list('like_id', flat=True))
+        for user_product in user_products_qs:
+            user_product.product.is_liked = user_product.product.id in liked_ids
+        return user_products_qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        context['like_count'] = user.user_likes.count()
+        context['basket_count'] = user.user_products.count()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        try:
+            data = json.loads(request.body)
+            product_id_str = data.get('product_id')
+            delta = int(data.get('delta', 0))
+            if not product_id_str:
+                return JsonResponse({'error': 'No product_id provided'}, status=400)
+            try:
+                product_id = int(product_id_str)
+            except ValueError:
+                return JsonResponse({'error': 'Invalid product_id'}, status=400)
+
+            product = Product.objects.filter(id=product_id).first()
+            if not product:
+                return JsonResponse({'error': 'Product not found'}, status=404)
+
+            user_product, created = UserProduct.objects.update_or_create(
+                user=request.user,
+                product=product,
+                defaults={'count': 0}
+            )
+            # Обновляем количество
+            new_count = user_product.count + delta
+            if new_count <= 0:
+                user_product.delete()
+            else:
+                user_product.count = new_count
+                user_product.save()
+
+            discount_percentage = 0
+
+            if product.stock:
+                discount_percentage = product.stock.discount or 0
+
+            new_count = max(0, user_product.count + delta)
+
+            if new_count == 0:
+                user_product.delete()
+            else:
+                user_product.count = new_count
+                user_product.save()
+
+            # Расчёт итоговой суммы
+            original_price = float(product.price)
+            discount_amount = original_price * (discount_percentage / 100)
+            discounted_price = original_price - discount_amount
+            total_price_value = round(discounted_price * new_count, 2)
+
+            basket_count = request.user.user_products.count()
+
+            return JsonResponse({
+                'basket_count': basket_count,
+                'product_count': new_count if new_count > 0 else 0,
+                'total_price': total_price_value
+            })
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+
+

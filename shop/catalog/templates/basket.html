@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/basket.css' %}">
+{% endblock %}
+
+{% block title %} Корзина {% endblock %}
+{% block content %}
+
+{% include 'name.html' %}
+
+<section class="section">
+    <div class="basket_blok">
+        <div class="basket_text"> Корзина </div>
+        <div class="line_basket"></div>
+    </div>
+    <div class="bucket_block">
+        <div class="first_bucket_block">
+            {% if user_products %}
+                {% for user_product in user_products %}
+                <div class="user_product_blok">
+                    <div class="product_bucket_foto">
+
+                        <div class="foto_product" style="background-image:url('{{ user_product.product.photos.all.0.photo.url }}')">
+                        <!-- Лайк -->
+                        {% if user.is_authenticated %}
+                          {% if user_product.product.is_liked %}
+                              <img class="like-img" src="{% static 'images/Vector1.png' %}" data-product-id="{{ user_product.product.id }}" style="cursor:pointer;">
+                          {% else %}
+                              <img class="like-img" src="{% static 'images/Vector.png' %}" data-product-id="{{ user_product.product.id }}" style="cursor:pointer;">
+                          {% endif %}
+                        {% else %}
+                          <img class="like-img register-btn" src="{% static 'images/Vector.png' %}" data-product-id="{{ user_product.product.id }}" style="cursor:pointer;">
+                        {% endif %}
+                        </div>
+
+                    </div>
+                    <div class="product_info_bucket">
+                        <div class="bucket_name">{{user_product.product.name}}</div>
+                        <div class="bucket_short_description">{{user_product.product.short_description}}</div>
+                        {% if user_product.product.stock %}
+                        <div class="bucket_stock">{{user_product.product.stock}}</div>
+                        {% endif %}
+                    </div>
+                    <div class="product_price">
+                        {% load price_extras %}
+                        <div class="price">
+                            {% if user_product.product.stock %}
+                                {% with discount_percentage=user_product.product.stock.discount|add:"0" %}
+                                {% with original_price=user_product.product.price %}
+                                {% with discount_amount=original_price|mul:discount_percentage|div:100 %}
+                                {% with discounted_price=original_price|subtract:discount_amount %}
+                                {% with total_price=user_product.count|mul:discounted_price %}
+                                    <div class="price_product"> {{ total_price|floatformat:0 }} ₽</div>
+                                {% endwith %}
+                                {% endwith %}
+                                {% endwith %}
+                                {% endwith %}
+                                {% with total_price=user_product.count|mul:user_product.product.price %}
+                                    <div class="price_product_stock"><span class="strikethrough"> {{ total_price|floatformat:0 }}</span> ₽</div>
+                                {% endwith %}
+
+                                {% endwith %}
+                            {% else %}
+                                {% with total_price=user_product.count|mul:user_product.product.price %}
+                                    <div class="price_product"> {{ total_price|floatformat:0 }} ₽</div>
+                                {% endwith %}
+                            {% endif %}
+                        </div>
+                        <div class="count_basket_blok">
+                            <div class="basket-item" data-product-id="{{ user_product.product.id }}">
+                                <button class="decrease" data-product-id="{{ user_product.product.id }}">-</button>
+                                <!-- Показываем текущее количество -->
+                                <div class="quantity" data-product-id="{{ user_product.product.id }}">{{ user_product.count }}</div>
+                                <button class="increase" data-product-id="{{ user_product.product.id }}">+</button>
+                            </div>
+                            <div class="delete-item" data-product-id="{{ user_product.product.id }}">
+                                <img class="delete" src="{% static 'images/basket.png' %}">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+
+            <div class="contact_information">
+                <div class="contact_information_text">
+                    Контактная информация
+                </div>
+                <form action="" method="get" class="form_basket">
+                  <label class="basket_label">
+                    <div>
+                      Имя:
+                    </div>
+                    <input class="basket_input" type="text" name="name">
+                  </label>
+                  <div class="line_basket"></div>
+                  <label class="basket_label">
+                    <div>
+                      Телефон:
+                    </div>
+                    <input class="basket_input" type="phone" name="phone">
+                  </label>
+                  <div class="line_basket"></div>
+                  </label>
+                  <label class="basket_label">
+                    <div>
+                      E-mail:
+                    </div>
+                    <input class="basket_input" type="email" name="email">
+                  </label>
+                  <div class="line_basket"></div>
+                  <label class="basket_label_comment">
+                    <div>
+                      Комментарий к заказу:
+                    </div>
+                    <textarea name="comment"></textarea>
+                  </label>
+                  <div class="line_basket"></div>
+                  <div class="basket_input_sogl1">
+                    <input class="basket_input_sogl" type="checkbox" id="subscribe" name="subscribe" value="yes">
+                    <label class="basket_label_sogl" for="subscribe">Согласие на обработку персональных данных</label>
+                  </div>
+                </form>
+            </div>
+
+            {% else %}
+                <div>
+                    Корзина пуста
+                </div>
+            {% endif %}
+        </div>
+        <div class="second_bucket_block">
+
+        </div>
+
+    </div>
+
+
+
+</section>
+    <script>
+        const updateBasketBaseUrl = "/update-basket/";
+        const addToBasketUrl = "{% url 'add_to_basket' %}";
+          {% if user.is_authenticated %}
+              var isAuthenticated = true;
+          {% else %}
+              var isAuthenticated = false;
+          {% endif %}
+    </script>
+<script src="{% static 'js/product.js' %}"></script>
+<script src="{% static 'js/skript.js' %}"></script>
+{% include 'feedback.html' %}
+{% endblock %}

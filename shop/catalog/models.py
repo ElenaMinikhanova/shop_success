@@ -6,8 +6,13 @@ from django.dispatch import receiver
 # Create your models here.
 class Stocks(models.Model):
     CATEGORY_CHOICES = [
+        ('3', '3%'),
+        ('5', '5%'),
         ('10', '10%'),
+        ('15', '15%'),
         ('20', '20%'),
+        ('30', '30%'),
+        ('50', '50%'),
     ]
     name = models.CharField(max_length=50, verbose_name='Название Акции')
     discount = models.CharField(max_length=50, choices=CATEGORY_CHOICES, verbose_name='Процент скидки')
@@ -41,6 +46,7 @@ class Product(models.Model):
     stock = models.ForeignKey(Stocks, on_delete=models.SET_NULL, verbose_name='Акция', null=True, default=None)
     name = models.CharField(max_length=100, verbose_name='Название')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
+    short_description = models.CharField(max_length=100, verbose_name='Краткое описание', default=None)
     description = models.TextField(verbose_name='Описание')
 
     class Meta:
