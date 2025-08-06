@@ -220,3 +220,15 @@
     height: 1px;
     margin-top: -25px;
 }
+input {
+    font-size: 20px;
+    font-weight: 300;
+    color: #555D61;
+}
+textarea {
+    font-size: 20px;
+    font-weight: 300;
+    color: #555D61;
+}
+
+

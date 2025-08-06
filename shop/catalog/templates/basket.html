@@ -93,14 +93,14 @@
                     <div>
                       Имя:
                     </div>
-                    <input class="basket_input" type="text" name="name">
+                    <input class="basket_input" type="text" name="name" value="{{ user_name|default:'' }}">
                   </label>
                   <div class="line_basket"></div>
                   <label class="basket_label">
                     <div>
                       Телефон:
                     </div>
-                    <input class="basket_input" type="phone" name="phone">
+                    <input class="basket_input" type="phone" name="phone" value="{{ user_phone|default:'' }}">
                   </label>
                   <div class="line_basket"></div>
                   </label>
@@ -108,7 +108,7 @@
                     <div>
                       E-mail:
                     </div>
-                    <input class="basket_input" type="email" name="email">
+                    <input class="basket_input" type="email" name="email" value="{{ user_email|default:'' }}">
                   </label>
                   <div class="line_basket"></div>
                   <label class="basket_label_comment">
@@ -132,7 +132,18 @@
             {% endif %}
         </div>
         <div class="second_bucket_block">
-
+            <div>
+                <div>Сумма заказа</div>
+                {% if basket_count <= 1 %}
+                    <div>{{ basket_count }} товар </div>
+                {% elif basket_count <= 4 %}
+                    <div>{{ basket_count }} товара </div>
+                {% else %}
+                    <div>{{ basket_count }} товаров </div>
+                {% endif %}
+                <div>Ваша скидка {{ total_discount|floatformat:2 }} ₽</div>
+                <div>Итого {{ total_price|floatformat:2 }} ₽</div>
+            </div>
         </div>
 
     </div>

@@ -224,8 +224,45 @@ class BasketView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
+
+        # Получение профиля пользователя
+        profile = getattr(user, 'profile', None)
+
+        # Добавляем данные о пользователе в контекст
+        context['user_name'] = user.first_name or ''
+        context['user_email'] = user.email or ''
+        context['user_phone'] = profile.phone_number if profile else ''
         context['like_count'] = user.user_likes.count()
         context['basket_count'] = user.user_products.count()
+
+        # Расчет общей суммы скидки и итоговой суммы
+        total_discount = 0
+        total_price_for_all = 0
+
+        user_products_qs = user.user_products.select_related('product', 'product__stock')
+        for up in user_products_qs:
+            product = up.product
+            count = up.count
+            price = float(product.price)
+            discount_percentage = 0
+
+            if product.stock and product.stock.discount is not None:
+                try:
+                    discount_percentage = float(product.stock.discount)
+                except (ValueError, TypeError):
+                    discount_percentage = 0
+
+            # Сумма скидки для этого товара
+            discount_amount = price * (discount_percentage / 100) * count
+            total_discount += discount_amount
+
+            # Итоговая цена с учетом скидки для этого товара
+            discounted_price = price - (price * (discount_percentage / 100))
+            total_price_for_all += discounted_price * count
+        # Округление, если нужно
+        context['total_discount'] = round(total_discount, 2)
+        context['total_price'] = round(total_price_for_all, 2)
+
         return context
 
     def post(self, request, *args, **kwargs):
@@ -233,8 +270,10 @@ class BasketView(LoginRequiredMixin, ListView):
             data = json.loads(request.body)
             product_id_str = data.get('product_id')
             delta = int(data.get('delta', 0))
+
             if not product_id_str:
                 return JsonResponse({'error': 'No product_id provided'}, status=400)
+
             try:
                 product_id = int(product_id_str)
             except ValueError:
@@ -244,43 +283,50 @@ class BasketView(LoginRequiredMixin, ListView):
             if not product:
                 return JsonResponse({'error': 'Product not found'}, status=404)
 
-            user_product, created = UserProduct.objects.update_or_create(
-                user=request.user,
-                product=product,
-                defaults={'count': 0}
-            )
-            # Обновляем количество
-            new_count = user_product.count + delta
-            if new_count <= 0:
-                user_product.delete()
-            else:
-                user_product.count = new_count
-                user_product.save()
+            # Попытка получить существующий UserProduct
+            user_product = UserProduct.objects.filter(user=request.user, product=product).first()
 
+            if user_product:
+                # Обновляем существующий товар
+                new_count = user_product.count + delta
+                if new_count <= 0:
+                    user_product.delete()
+                    new_count = 0
+                else:
+                    user_product.count = new_count
+                    user_product.save()
+            else:
+                # Создаём новый, если delta > 0
+                if delta > 0:
+                    user_product = UserProduct.objects.create(
+                        user=request.user,
+                        product=product,
+                        count=delta
+                    )
+                    new_count = delta
+                else:
+                    # Если delta отрицательный и товара нет, ничего не делаем
+                    new_count = 0
+
+            # Получение скидки
             discount_percentage = 0
+            if product.stock and product.stock.discount is not None:
+                try:
+                    discount_percentage = float(product.stock.discount)
+                except (ValueError, TypeError):
+                    discount_percentage = 0
 
-            if product.stock:
-                discount_percentage = product.stock.discount or 0
-
-            new_count = max(0, user_product.count + delta)
-
-            if new_count == 0:
-                user_product.delete()
-            else:
-                user_product.count = new_count
-                user_product.save()
-
-            # Расчёт итоговой суммы
             original_price = float(product.price)
             discount_amount = original_price * (discount_percentage / 100)
             discounted_price = original_price - discount_amount
             total_price_value = round(discounted_price * new_count, 2)
 
-            basket_count = request.user.user_products.count()
+            # Общее количество товаров в корзине
+            basket_count = request.user.user_products.aggregate(total=Sum('count'))['total'] or 0
 
             return JsonResponse({
                 'basket_count': basket_count,
-                'product_count': new_count if new_count > 0 else 0,
+                'product_count': new_count,
                 'total_price': total_price_value
             })
 
