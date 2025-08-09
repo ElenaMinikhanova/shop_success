@@ -88,19 +88,20 @@
                 <div class="contact_information_text">
                     Контактная информация
                 </div>
-                <form action="" method="get" class="form_basket">
+                <form action="{% url 'submit_order' %}" method="post" class="form_basket" id="orderForm">
+                {% csrf_token %}
                   <label class="basket_label">
                     <div>
                       Имя:
                     </div>
-                    <input class="basket_input" type="text" name="name" value="{{ user_name|default:'' }}">
+                    <input class="basket_input" type="text" name="name" value="{{ user_name|default:'' }}" required>
                   </label>
                   <div class="line_basket"></div>
                   <label class="basket_label">
                     <div>
                       Телефон:
                     </div>
-                    <input class="basket_input" type="phone" name="phone" value="{{ user_phone|default:'' }}">
+                    <input class="basket_input" type="phone" name="phone" value="{{ user_phone|default:'' }}" required>
                   </label>
                   <div class="line_basket"></div>
                   </label>
@@ -108,7 +109,7 @@
                     <div>
                       E-mail:
                     </div>
-                    <input class="basket_input" type="email" name="email" value="{{ user_email|default:'' }}">
+                    <input class="basket_input" type="email" name="email" value="{{ user_email|default:'' }}" required>
                   </label>
                   <div class="line_basket"></div>
                   <label class="basket_label_comment">
@@ -119,7 +120,7 @@
                   </label>
                   <div class="line_basket"></div>
                   <div class="basket_input_sogl1">
-                    <input class="basket_input_sogl" type="checkbox" id="subscribe" name="subscribe" value="yes">
+                    <input class="basket_input_sogl" type="checkbox" id="subscribe" name="subscribe" value="yes" required>
                     <label class="basket_label_sogl" for="subscribe">Согласие на обработку персональных данных</label>
                   </div>
                 </form>
@@ -132,26 +133,47 @@
             {% endif %}
         </div>
         <div class="second_bucket_block">
-            <div>
-                <div>Сумма заказа</div>
+            <div class="bucket_result">
+                <div class="order_amount">Сумма заказа</div>
                 {% if basket_count <= 1 %}
-                    <div>{{ basket_count }} товар </div>
+                    <div class="basket_count_amount">{{ basket_count }} товар </div>
                 {% elif basket_count <= 4 %}
-                    <div>{{ basket_count }} товара </div>
+                    <div class="basket_count_amount">{{ basket_count }} товара </div>
                 {% else %}
-                    <div>{{ basket_count }} товаров </div>
+                    <div class="basket_count_amount">{{ basket_count }} товаров </div>
                 {% endif %}
-                <div>Ваша скидка {{ total_discount|floatformat:2 }} ₽</div>
-                <div>Итого {{ total_price|floatformat:2 }} ₽</div>
+                <div class="line_order_amount"></div>
+                <div class="amount_basket">
+                    <div class="basket_count_amount">Сумма заказа</div>
+                    <div class="amount_price">{{ total_price_all|floatformat:2 }} ₽</div>
+                </div>
+                <div class="line_order_amount"></div>
+                <div class="amount_basket">
+                    <div class="basket_count_amount">Ваша скидка</div>
+                    <div class="amount_price">{{ total_discount|floatformat:2 }} ₽</div>
+                </div>
+                <div class="line_order_amount"></div>
+                <div class="amount_basket_all">
+                    <div class="basket_count_amount_all">Итого</div>
+                    <div class="amount_price_all">{{ total_price|floatformat:2 }} ₽</div>
+                </div>
+                <div class="line_order_amount"></div>
+                <button id="submitOrderBtn" class="arrange">Оформить</button>
             </div>
         </div>
 
     </div>
 
-
-
 </section>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var btn = document.getElementById('submitOrderBtn');
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    document.getElementById('orderForm').submit();
+                });
+            }
+        });
         const updateBasketBaseUrl = "/update-basket/";
         const addToBasketUrl = "{% url 'add_to_basket' %}";
           {% if user.is_authenticated %}

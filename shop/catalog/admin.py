@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, PhotoProduct, Category, Stocks, UserInfo
+from .models import Product, PhotoProduct, Category, Stocks, UserInfo, OrderHistory, Order
 # Register your models here.
 
 class PhotoProductInline(admin.TabularInline):
@@ -32,3 +32,16 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(UserInfo)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('user',)
+
+class OrderInline(admin.TabularInline):
+    model = Order
+    extra = 0  # Не добавлять лишних пустых строк
+
+@admin.register(OrderHistory)
+class OrderAdmin(admin.ModelAdmin):
+    inlines = [OrderInline]
+    list_display = ('id', 'user', 'status', 'date_order', 'date_status')
+    list_editable = ('status',)
+
+
+admin.site.register(Order)

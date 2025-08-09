@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import uuid
 
 # Create your models here.
 class Stocks(models.Model):
@@ -94,4 +95,31 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+class OrderHistory(models.Model):
+    CATEGORY_CHOICES = [
+        ('processing', 'Обработка'),
+        ('assembly', 'Сборка'),
+        ('assembled', 'Собран'),
+        ('delivery', 'Доставка'),
+        ('cancelled', 'Отменен'),
+        ('rejection', 'Отказ'),
+        ('completed', 'Завершен'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_order')
+    status = models.CharField(max_length=50, choices=CATEGORY_CHOICES, verbose_name='Статус заказа')
+    date_order = models.DateTimeField(auto_now_add=True)
+    date_status = models.DateTimeField(auto_now=True)
+    order_number = models.CharField(max_length=20, verbose_name='Номер заказа')
+
+
+    def __str__(self):
+        return f'Заказ: {self.user}, Название: {self.order_number}'
+
+class Order(models.Model):
+    order_number = models.ForeignKey(OrderHistory, on_delete=models.CASCADE, related_name='items')
+    name_product = models.CharField(max_length=100, verbose_name='Название продукта')
+    category_product = models.CharField(max_length=100, verbose_name='Категория продукта')
+    price_product = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена продукта')
+    count_product = models.IntegerField(verbose_name='Количество')
 

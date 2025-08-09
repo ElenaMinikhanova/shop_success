@@ -26,7 +26,7 @@
 .bucket_block {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 16px;
 }
 .first_bucket_block {
@@ -38,6 +38,7 @@
 }
 .second_bucket_block {
     width: 400px;
+    display: flex;
 }
 .user_product_blok {
     display: flex;
@@ -230,5 +231,104 @@ textarea {
     font-weight: 300;
     color: #555D61;
 }
-
-
+.bucket_result {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: 541px;
+    border-radius: 20px;
+    background-color: #F2F6F7;
+    border: 1px solid #78AC47;
+}
+.order_amount {
+    font-size: 24px;
+    font-family: "Vetrino";
+    font-weight: 400;
+    padding-left: 22px;
+    padding-top: 26px;
+}
+.basket_count_amount {
+    display: flex;
+    justify-content: flex-start;
+    width: 250px;
+    font-size: 24px;
+    font-family: "Rubik";
+    font-weight: 400;
+    padding-top: 29px;
+    padding-left: 26px;
+}
+.line_order_amount {
+    width: 330px;
+    height: 0.5px;
+    background-color: #000000;
+    margin-left: 22px;
+    margin-top: 20px;
+}
+.total_basket {
+    font-weight: 500;
+    padding-left: 32px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: flex-start;
+    width: 250px;
+    font-size: 24px;
+    font-family: "Rubik";
+    padding-top: 29px;
+    padding-left: 26px;
+}
+.arrange {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFDFD;
+    background-color: #78AC47;
+    width: 355px;
+    height: 64px;
+    border-radius: 40px;
+    font-family: "Rubik";
+    font-size: 24px;
+    margin-left: 22px;
+    margin-top: 19px;
+    border: none;
+}
+.amount_basket {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.amount_price {
+    display: flex;
+    justify-content: flex-end;
+    width: 200px;
+    font-family: "Rubik";
+    font-size: 24px;
+    font-weight: 400;
+    padding-top: 29px;
+    padding-right: 26px;
+}
+.basket_count_amount_all {
+    display: flex;
+    justify-content: flex-start;
+    width: 250px;
+    font-size: 24px;
+    font-family: "Rubik";
+    font-weight: 500;
+    padding-top: 29px;
+    padding-left: 26px;
+}
+.amount_price_all {
+    display: flex;
+    justify-content: flex-end;
+    width: 200px;
+    font-family: "Rubik";
+    font-size: 24px;
+    font-weight: 500;
+    padding-top: 29px;
+    padding-right: 26px;
+}
+.amount_basket_all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
+}

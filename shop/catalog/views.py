@@ -1,12 +1,15 @@
 from django.db.models import Sum
 from django.views.generic import ListView, DetailView, UpdateView, View, TemplateView
 from django.views import View
-from .models import Product, UserLike, UserProduct
+from .models import Product, UserLike, UserProduct, Order, OrderHistory
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import RegistrationForm
 import json
+from django.utils import timezone
+from django.urls import reverse
+from django.core.mail import send_mail
 from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_POST
 from django.http import HttpResponseNotAllowed
@@ -238,6 +241,7 @@ class BasketView(LoginRequiredMixin, ListView):
         # Расчет общей суммы скидки и итоговой суммы
         total_discount = 0
         total_price_for_all = 0
+        total_price_for_all_orig = 0
 
         user_products_qs = user.user_products.select_related('product', 'product__stock')
         for up in user_products_qs:
@@ -259,9 +263,13 @@ class BasketView(LoginRequiredMixin, ListView):
             # Итоговая цена с учетом скидки для этого товара
             discounted_price = price - (price * (discount_percentage / 100))
             total_price_for_all += discounted_price * count
+
+            total_price_for_all_orig += price * count
+
         # Округление, если нужно
         context['total_discount'] = round(total_discount, 2)
         context['total_price'] = round(total_price_for_all, 2)
+        context['total_price_all'] = round(total_price_for_all_orig, 2)
 
         return context
 
@@ -332,5 +340,84 @@ class BasketView(LoginRequiredMixin, ListView):
 
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
+
+class SubmitOrderView(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        # Получение данных из формы
+        name = request.POST.get('name', '')
+        phone = request.POST.get('phone', '')
+        email = request.POST.get('email', '')
+        comment = request.POST.get('comment', '')
+
+        user = request.user
+
+        # Собираем список товаров из корзины
+        user_products = user.user_products.select_related('product')
+        order_items = []
+        total_order_price = 0
+
+        for up in user_products:
+            product = up.product
+            count = up.count
+            price = float(product.price)
+            discount_percentage = 0
+            if product.stock and product.stock.discount is not None:
+                try:
+                    discount_percentage = float(product.stock.discount)
+                except (ValueError, TypeError):
+                    discount_percentage = 0
+            discounted_price = price - (price * (discount_percentage / 100))
+            line_total = discounted_price * count
+            total_order_price += line_total
+
+            order_items.append(f"{product.name} x {count} - {line_total:.2f} ₽")
+
+        # Создаем OrderHistory с статусом "processing"
+        order_history = OrderHistory.objects.create(
+            user=user,
+            status='processing',
+            date_order=timezone.now()
+        )
+
+        # Создаем Order для каждого продукта
+        for up in user_products:
+            product = up.product
+            count = up.count
+            price = product.price
+            category_name = product.category.name if product.category else ''
+            Order.objects.create(
+                order_number=order_history,
+                name_product=product.name,
+                category_product=category_name,
+                price_product=price,
+                count_product=count
+            )
+
+        # Отправляем письмо
+        message = f"""
+        Новый заказ от {name}
+        Контактная информация:
+        Телефон: {phone}
+        E-mail: {email}
+        Комментарий: {comment}
+
+        Заказанные товары:
+        {'\n'.join(order_items)}
+
+        Итоговая сумма: {total_order_price:.2f} ₽
+        """
+
+        send_mail(
+            subject='Новый заказ',
+            message=message,
+            from_email='alena.minihanova@yandex.ru',  # замените на свой email
+            recipient_list=['toxinka89@bk.ru'],  # адрес получателя
+            fail_silently=False,
+        )
+
+        # Очищаем корзину
+        user.user_products.all().delete()
+
+        return redirect('basket')  # или другая страница
 
 
