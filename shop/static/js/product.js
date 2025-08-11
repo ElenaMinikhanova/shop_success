@@ -106,31 +106,5 @@ document.addEventListener('DOMContentLoaded', function() {
         location.reload();
     }
 });}
-document.querySelectorAll('.delete-item').forEach(deleteBtn => {
-    deleteBtn.addEventListener('click', function() {
-        const productId = this.dataset.productId;
-        const url = `/basket/`; // URL для обновления корзины
 
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': getCookie('csrftoken'),
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({product_id: productId, delta: -9999}) // очень большое число для удаления
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.basket_count >= 0) {
-                // Удаляем элемент из DOM
-                const itemDiv = document.querySelector(`.basket-item[data-product-id="${productId}"]`);
-                if (itemDiv) {
-                    itemDiv.remove();
-                }
-                // Обновляем счетчики
-                // Можно обновить счетчики или перезагрузить страницу
-                location.reload();
-            }
-        });
-    });
-});
+

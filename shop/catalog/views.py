@@ -383,13 +383,20 @@ class SubmitOrderView(LoginRequiredMixin, View):
         for up in user_products:
             product = up.product
             count = up.count
-            price = product.price
+            price = float(product.price)
+            discount_percentage = 0
+            if product.stock and product.stock.discount is not None:
+                try:
+                    discount_percentage = float(product.stock.discount)
+                except (ValueError, TypeError):
+                    discount_percentage = 0
+            discounted_price = price - (price * (discount_percentage / 100))
             category_name = product.category.name if product.category else ''
             Order.objects.create(
                 order_number=order_history,
                 name_product=product.name,
                 category_product=category_name,
-                price_product=price,
+                price_product=discounted_price,
                 count_product=count
             )
 

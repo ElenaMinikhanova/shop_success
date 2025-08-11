@@ -13,7 +13,7 @@
 <section class="section">
     <div class="basket_blok">
         <div class="basket_text"> Корзина </div>
-        <div class="line_basket"></div>
+        <div class="line_basket_text"></div>
     </div>
     <div class="bucket_block">
         <div class="first_bucket_block">
@@ -88,13 +88,14 @@
                 <div class="contact_information_text">
                     Контактная информация
                 </div>
-                <form action="{% url 'submit_order' %}" method="post" class="form_basket" id="orderForm">
+                <form id="orderForm" action="{% url 'submit_order' %}" method="post" class="form_basket">
                 {% csrf_token %}
                   <label class="basket_label">
                     <div>
                       Имя:
                     </div>
                     <input class="basket_input" type="text" name="name" value="{{ user_name|default:'' }}" required>
+                    <div class="error-message" id="error-name" style="color:red; font-size:0.9em; margin-top:4px;"></div>
                   </label>
                   <div class="line_basket"></div>
                   <label class="basket_label">
@@ -102,6 +103,7 @@
                       Телефон:
                     </div>
                     <input class="basket_input" type="phone" name="phone" value="{{ user_phone|default:'' }}" required>
+                    <div class="error-message" id="error-phone" style="color:red; font-size:0.9em; margin-top:4px;"></div>
                   </label>
                   <div class="line_basket"></div>
                   </label>
@@ -110,6 +112,7 @@
                       E-mail:
                     </div>
                     <input class="basket_input" type="email" name="email" value="{{ user_email|default:'' }}" required>
+                    <div class="error-message" id="error-email" style="color:red; font-size:0.9em; margin-top:4px;"></div>
                   </label>
                   <div class="line_basket"></div>
                   <label class="basket_label_comment">
@@ -124,6 +127,21 @@
                     <label class="basket_label_sogl" for="subscribe">Согласие на обработку персональных данных</label>
                   </div>
                 </form>
+            </div>
+            <div class="method_receipt">
+                <div class="method_receipt_text">
+                    Способ получения товаров
+                </div>
+                <div class="method_receipt_choice">
+                    <input type="radio" id="courier" name="delivery" value="courier">
+                    <label for="courier" class="courier_delivery">Курьерская служба</label>
+                    <input type="radio" id="co-delivery" name="delivery" value="co-delivery">
+                    <label for="co-delivery" class="co-delivery_delivery">Самовывоз</label>
+                </div>
+                <div class="method_receipt_choice">
+                    <div class="delivery_door">Доставка до дверей в выбранное<br>вам время</div>
+                    <div class="delivery_self">При готовности заказа<br>придет уведомление</div>
+                </div>
             </div>
 
             {% else %}
@@ -158,7 +176,7 @@
                     <div class="amount_price_all">{{ total_price|floatformat:2 }} ₽</div>
                 </div>
                 <div class="line_order_amount"></div>
-                <button id="submitOrderBtn" class="arrange">Оформить</button>
+                <button type="submit" id="submitOrderBtn" class="arrange">Оформить</button>
             </div>
         </div>
 
@@ -166,14 +184,6 @@
 
 </section>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var btn = document.getElementById('submitOrderBtn');
-            if (btn) {
-                btn.addEventListener('click', function() {
-                    document.getElementById('orderForm').submit();
-                });
-            }
-        });
         const updateBasketBaseUrl = "/update-basket/";
         const addToBasketUrl = "{% url 'add_to_basket' %}";
           {% if user.is_authenticated %}
@@ -182,7 +192,7 @@
               var isAuthenticated = false;
           {% endif %}
     </script>
-<script src="{% static 'js/product.js' %}"></script>
+<script src="{% static 'js/basket.js' %}"></script>
 <script src="{% static 'js/skript.js' %}"></script>
 {% include 'feedback.html' %}
 {% endblock %}

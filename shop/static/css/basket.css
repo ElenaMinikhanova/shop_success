@@ -19,7 +19,7 @@
     font-weight: 400;
     line-height: 48px;
 }
-.line_basket {
+.line_basket_text {
     border-bottom: 1px solid #000000;
     width: 1024px;
 }
@@ -277,6 +277,7 @@ textarea {
     padding-left: 26px;
 }
 .arrange {
+    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -332,3 +333,53 @@ textarea {
     justify-content: center;
     padding-bottom: 10px;
 }
+.method_receipt {
+    display: flex;
+    flex-direction: column;
+    width: 816px;
+    height: 249px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    margin-top: 8px;
+    padding-left: 8px;
+}
+.method_receipt_text {
+    font-family: "Vetrino";
+    font-size: 34px;
+    width: 707px;
+    font-weight: 400;
+    padding-top: 10px;
+    padding-left: 8px;
+}
+.method_receipt_choice {
+    display: flex;
+    padding-top: 20px;
+    gap: 5px;
+}
+.courier_delivery {
+    font-family: "Vetrino";
+    font-size: 26px;
+    width: 423px;
+    font-weight: 400;
+}
+.co-delivery_delivery {
+    font-family: "Vetrino";
+    font-size: 26px;
+    width: 367px;
+    font-weight: 400;
+}
+.delivery_door {
+    font-size: 22px;
+    font-weight: 400;
+    font-family: "Rubik";
+    width: 423px;
+    padding-left: 25px;
+}
+.delivery_self {
+    font-size: 22px;
+    font-weight: 400;
+    font-family: "Rubik";
+    width: 367px;
+    padding-left: 33px;
+}
+
